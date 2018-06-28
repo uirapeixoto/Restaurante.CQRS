@@ -52,6 +52,7 @@
     <Compile Include="Mesa\OpenTab.cs" />
     <Compile Include="Mesa\TabOpened.cs" />
     <Compile Include="Restaurante\MarkDrinksServed.cs" />
+    <Compile Include="Restaurante\Menu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

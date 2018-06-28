@@ -40,7 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Cozinha\FoodOrderedCommand.cs" />
+    <Compile Include="Cozinha\Handler\IncluirPedidoComidaTarefaCommandHandler.cs" />
+    <Compile Include="Cozinha\Handler\RemoverTarefaCozinhaCommandHandler.cs" />
+    <Compile Include="Cozinha\OrderedItemCommand.cs" />
+    <Compile Include="Cozinha\TodoListItemCommand.cs" />
+    <Compile Include="Cozinha\Handler\IncluirTarefaCozinhaCommandHandler.cs" />
+    <Compile Include="Cozinha\Result\OrderedItemCommandResult.cs" />
+    <Compile Include="Cozinha\Result\TodoListGroupCommandResult.cs" />
+    <Compile Include="Cozinha\Result\TodoListItemCommandResult.cs" />
+    <Compile Include="Cozinha\TodoListGroupCommand.cs" />
     <Compile Include="Mesas\TabAggregate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -57,6 +66,11 @@
       <Project>{553638B8-3264-4187-AB78-91B37337E9E7}</Project>
       <Name>Restaurante.Events</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Restaurante.Infra\Restaurante.Infra.csproj">
+      <Project>{6BA0BDF3-E23D-4593-8D53-FCFAE5B82B79}</Project>
+      <Name>Restaurante.Infra</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Restaurante.Query
 {
-    public class Class1
+    public class TodoListGroupQuery
     {
     }
 }

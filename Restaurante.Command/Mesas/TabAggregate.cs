@@ -1,5 +1,6 @@
 ﻿using Restaurante.Contract;
 using Restaurante.Dominio.Mesa;
+using Restaurante.Dominio.Pedido;
 using Restaurante.Dominio.Restaurante;
 using Restaurante.Events;
 using Restaurante.Events.Mesas;
@@ -15,7 +16,12 @@ namespace Restaurante.Command
         IApplyEvent<TabOpened>
     {
         private bool _open = false;
-        private List<int> outstandingDrinks = new List<int>();
+        private List<OrderedItem> outstandingDrinks = new List<OrderedItem>();
+        private List<OrderedItem> outstandingFood = new List<OrderedItem>();
+        private List<OrderedItem> preparedFood = new List<OrderedItem>();
+
+        private bool open;
+        private decimal servedItemsValue;
 
         public void Apply(TabOpened e)
         {
@@ -24,13 +30,17 @@ namespace Restaurante.Command
 
         public void Apply(DrinksOrdered e)
         {
-            outstandingDrinks.AddRange(e.Items.Select(i => i.MenuNumber));
+            outstandingDrinks.AddRange(e.Items);
         }
 
         public void Apply(DrinksServed e)
         {
             foreach (var num in e.MenuNumbers)
-                outstandingDrinks.Remove(num);
+            {
+                var item = outstandingDrinks.First(d => d.MenuNumber == num);
+                outstandingDrinks.Remove(item);
+                servedItemsValue += item.Price;
+            }
         }
 
         public IEnumerable Handle(OpenTab c)
@@ -77,12 +87,38 @@ namespace Restaurante.Command
             };
         }
 
+        public IEnumerable Handle(CloseTab c)
+        {
+            yield return new TabClosed
+            {
+                Id = c.Id,
+                AmountPaid = c.AmountPaid,
+                OrderValue = servedItemsValue,
+                TipValue = c.AmountPaid - servedItemsValue
+            };
+        }
+
         private bool AreDrinksOutstanding(List<int> menuNumbers)
         {
-            var curOutstanding = new List<int>(outstandingDrinks);
-            foreach (var num in menuNumbers)
-                if (curOutstanding.Contains(num))
-                    curOutstanding.Remove(num);
+            return AreAllInList(want: menuNumbers, have: outstandingDrinks);
+        }
+
+        private bool IsFoodOutstanding(List<int> menuNumbers)
+        {
+            return AreAllInList(want: menuNumbers, have: outstandingFood);
+        }
+
+        private bool IsFoodPrepared(List<int> menuNumbers)
+        {
+            return AreAllInList(want: menuNumbers, have: preparedFood);
+        }
+
+        private static bool AreAllInList(List<int> want, List<OrderedItem> have)
+        {
+            var curHave = new List<int>(have.Select(i => i.MenuNumber));
+            foreach (var num in want)
+                if (curHave.Contains(num))
+                    curHave.Remove(num);
                 else
                     return false;
             return true;
