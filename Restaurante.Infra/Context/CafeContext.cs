@@ -11,7 +11,6 @@ namespace Restaurante.Infra.Context
 
         }
 
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TB_MENU_ITEM> TB_MENU_ITEM { get; set; }
         public virtual DbSet<TB_ORDERED> TB_ORDERED { get; set; }
         public virtual DbSet<TB_ORDERED_ITEM> TB_ORDERED_ITEM { get; set; }
