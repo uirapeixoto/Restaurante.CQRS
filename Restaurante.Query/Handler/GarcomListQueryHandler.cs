@@ -1,12 +1,9 @@
 ﻿using Restaurante.Contract;
 using Restaurante.Infra.Context;
-using Restaurante.Query.Query;
 using Restaurante.Query.Result;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Restaurante.Query.Handler
 {
@@ -20,13 +17,22 @@ namespace Restaurante.Query.Handler
 
         public IEnumerable<GarcomQueryResult> Handle()
         {
-            return _context.TB_WAITSTAFF
-                .AsNoTracking()
-                .AsParallel()
-                .Select(e => new GarcomQueryResult(
-                    e.ID,
-                    e.DS_NAME))
-                .ToList();
+            try
+            {
+                var result = _context.TB_WAITSTAFF
+                                .AsNoTracking()
+                                .AsParallel()
+                                .Select(e => new GarcomQueryResult(
+                                    e.ID,
+                                    e.DS_NAME))
+                                .ToList();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }

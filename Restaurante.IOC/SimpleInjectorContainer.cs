@@ -18,15 +18,15 @@ namespace Restaurante.IOC
             container.Register<ICafeContext, CafeContext>(Lifestyle.Scoped);
 
             //Registrando as query Handlers
-            typeof(MesaAbertaQueryHandler).Assembly.GetExportedTypes()
-                .Where(x => x.Namespace.EndsWith("Handler"))
-                .Where(x => x.GetInterfaces().Any())
-                .ToList()
-                .ForEach(x => container.Register(x.GetInterfaces().Single(), x, Lifestyle.Transient));
+            //typeof(MesaAbertaQueryHandler).Assembly.GetExportedTypes()
+            //    .Where(x => x.Namespace.EndsWith("Handler"))
+            //    .Where(x => x.GetInterfaces().Any())
+            //    .ToList()
+            //    .ForEach(x => container.Register(x.GetInterfaces().Single(), x, Lifestyle.Transient));
 
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
-
             container.Verify();
+
             return container;
         }
     }

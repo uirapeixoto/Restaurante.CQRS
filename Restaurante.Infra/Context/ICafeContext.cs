@@ -1,8 +1,9 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 
 namespace Restaurante.Infra.Context
 {
-    public interface ICafeContext
+    public interface ICafeContext : IDisposable
     {
         DbSet<TB_MENU_ITEM> TB_MENU_ITEM { get; set; }
         DbSet<TB_ORDERED> TB_ORDERED { get; set; }
