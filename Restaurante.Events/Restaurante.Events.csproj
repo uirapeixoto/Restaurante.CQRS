@@ -41,13 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Aggregate.cs" />
-    <Compile Include="Mesas\CloseTab.cs" />
     <Compile Include="Mesas\DrinksServed.cs" />
     <Compile Include="Mesas\DrinksOrdered.cs" />
     <Compile Include="Mesas\FoodOrdered.cs" />
-    <Compile Include="Mesas\FoodPrepared.cs" />
     <Compile Include="Mesas\PlaceOrder.cs" />
-    <Compile Include="Mesas\TabClosed.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

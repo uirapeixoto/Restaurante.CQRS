@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Restaurante.IOC;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +19,7 @@ namespace Restaurante.UI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            DependencyResolver.SetResolver(SimpleInjectorContainer.RegisterServices());
         }
     }
 }

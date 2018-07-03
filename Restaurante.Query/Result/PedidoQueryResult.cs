@@ -1,10 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using Restaurante.Contract;
 
 namespace Restaurante.Query.Result
 {
-    public class PedidoQueryResult
+    public class PedidoQueryResult : IQueryResult
     {
-        public int Id { get; set; }
-        public IEnumerable<ItemQueryResult> Itens { get; set; }
+        public int Id { get; }
+        public MesaAbertaQueryResult MesaAberta { get; }
+        public PedidoItemQueryResult PedidoItem { get;  }
+
+        public PedidoQueryResult(int id, MesaAbertaQueryResult mesaAberta, PedidoItemQueryResult pedidoItem)
+        {
+            Id = id;
+            MesaAberta = mesaAberta;
+            PedidoItem = pedidoItem;
+        }
     }
 }

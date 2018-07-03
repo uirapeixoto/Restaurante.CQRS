@@ -46,10 +46,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SimpleInjector, Version=4.3.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.4.3.0\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -148,6 +157,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionFilters\IncludeLayoutDataAttribute.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -157,6 +167,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\GarcomViewModel.cs" />
+    <Compile Include="ViewModel\MenuItemViewModel.cs" />
+    <Compile Include="ViewModel\MesaAbertaViewModel.cs" />
+    <Compile Include="ViewModel\PedidoItemViewModel.cs" />
+    <Compile Include="ViewModel\PedidoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -195,6 +210,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Garcons\Tarefa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -212,6 +228,28 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Restaurante.Contract\Restaurante.Contract.csproj">
+      <Project>{D62A4424-6D28-49AD-B2E5-AD1499FC2C76}</Project>
+      <Name>Restaurante.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Restaurante.Dominio\Restaurante.Dominio.csproj">
+      <Project>{cfcdcab1-e341-4c3d-a9ff-0c6b42f7ae5f}</Project>
+      <Name>Restaurante.Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Restaurante.Infra\Restaurante.Infra.csproj">
+      <Project>{6BA0BDF3-E23D-4593-8D53-FCFAE5B82B79}</Project>
+      <Name>Restaurante.Infra</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Restaurante.IOC\Restaurante.IOC.csproj">
+      <Project>{76939836-9825-4f5e-a49a-3749d4084f91}</Project>
+      <Name>Restaurante.IOC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Restaurante.Query\Restaurante.Query.csproj">
+      <Project>{4B3531D9-233A-44A9-A762-C01765796FCB}</Project>
+      <Name>Restaurante.Query</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

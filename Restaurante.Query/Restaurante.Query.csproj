@@ -30,7 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,31 +47,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Handler\GetTodoListQueryHandler.cs" />
-    <Compile Include="Handler\TodoListGroupQueryHandler.cs" />
-    <Compile Include="Handler\TodoListItemQueryHandler.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Handler\GarcomListQueryHandler.cs" />
+    <Compile Include="Handler\MesaAbertaListQueryHandler.cs" />
+    <Compile Include="Handler\MesaAbertaQueryHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Result\ChefTodoListQueryResult.cs" />
-    <Compile Include="Result\FoodOrderedQueryResult.cs" />
-    <Compile Include="Result\ItemQueryResult.cs" />
-    <Compile Include="Result\MesaQueryResult.cs" />
-    <Compile Include="Result\OrderedItemQueryResult.cs" />
+    <Compile Include="Query\GarcomQuery.cs" />
+    <Compile Include="Query\MenuItemQuery.cs" />
+    <Compile Include="Query\MesaAbertaQuery.cs" />
+    <Compile Include="Query\PedidoItemQuery.cs" />
+    <Compile Include="Query\PedidoQuery.cs" />
+    <Compile Include="Query\TarefaQuery.cs" />
+    <Compile Include="Result\GarcomQueryResult.cs" />
+    <Compile Include="Result\MenuItemQueryResult.cs" />
+    <Compile Include="Result\MesaAbertaQueryResult.cs" />
+    <Compile Include="Result\PedidoItemQueryResult.cs" />
     <Compile Include="Result\PedidoQueryResult.cs" />
-    <Compile Include="Result\TodoListGroupQueryResult.cs" />
-    <Compile Include="Result\TodoListItemQueryResult.cs" />
-    <Compile Include="MesaQuery.cs" />
-    <Compile Include="TodoListGroupQuery.cs" />
-    <Compile Include="TodoListItemQuery.cs" />
+    <Compile Include="Result\TarefaQueryResult.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Restaurante.Contract\Restaurante.Contract.csproj">
-      <Project>{D62A4424-6D28-49AD-B2E5-AD1499FC2C76}</Project>
+      <Project>{d62a4424-6d28-49ad-b2e5-ad1499fc2c76}</Project>
       <Name>Restaurante.Contract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Restaurante.Events\Restaurante.Events.csproj">
-      <Project>{553638B8-3264-4187-AB78-91B37337E9E7}</Project>
-      <Name>Restaurante.Events</Name>
     </ProjectReference>
     <ProjectReference Include="..\Restaurante.Infra\Restaurante.Infra.csproj">
       <Project>{6BA0BDF3-E23D-4593-8D53-FCFAE5B82B79}</Project>

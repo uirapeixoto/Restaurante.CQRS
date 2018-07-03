@@ -42,13 +42,15 @@
   <ItemGroup>
     <Compile Include="IApplyEvent.cs" />
     <Compile Include="ICommand.cs" />
+    <Compile Include="ICommandHandler.cs" />
     <Compile Include="ICommandResult.cs" />
-    <Compile Include="IHandleCommand.cs" />
     <Compile Include="IQuery.cs" />
     <Compile Include="IQueryHandler.cs" />
-    <Compile Include="IResult.cs" />
-    <Compile Include="ISubscribeTo.cs" />
+    <Compile Include="IQueryResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

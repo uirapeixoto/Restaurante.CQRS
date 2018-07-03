@@ -39,6 +39,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,17 +50,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Models\Item.cs" />
-    <Compile Include="Models\Pedido.cs" />
-    <Compile Include="Models\TodoListMock.cs" />
+    <Compile Include="Context\CafeContext.cs" />
+    <Compile Include="Context\ICafeContext.cs" />
+    <Compile Include="Context\sysdiagrams.cs" />
+    <Compile Include="Context\TB_MENU_ITEM.cs" />
+    <Compile Include="Context\TB_ORDERED.cs" />
+    <Compile Include="Context\TB_ORDERED_ITEM.cs" />
+    <Compile Include="Context\TB_TAB_CLOSED.cs" />
+    <Compile Include="Context\TB_TAB_OPENED.cs" />
+    <Compile Include="Context\TB_TODO.cs" />
+    <Compile Include="Context\TB_WAITSTAFF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Context\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Restaurante.Contract\Restaurante.Contract.csproj">
+      <Project>{D62A4424-6D28-49AD-B2E5-AD1499FC2C76}</Project>
+      <Name>Restaurante.Contract</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
