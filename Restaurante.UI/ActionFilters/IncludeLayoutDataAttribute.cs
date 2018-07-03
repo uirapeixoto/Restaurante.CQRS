@@ -8,12 +8,14 @@ namespace Restaurante.UI.ActionFilters
 {
     public class IncludeLayoutDataAttribute : ActionFilterAttribute
     {
-        private IQueryHandler<IEnumerable<GarcomQueryResult>> _garcomListHandler;
-
-        public IncludeLayoutDataAttribute(IQueryHandler<IEnumerable<GarcomQueryResult>> garcomListHandler)
+        private IQueryHandler<IEnumerable<GarcomQueryResult>> _garcomListHandler
         {
-            _garcomListHandler = garcomListHandler;
+              get
+            {
+                return DependencyResolver.Current.GetService<IQueryHandler<IEnumerable<GarcomQueryResult>>>();
+            }
         }
+
         public override void OnResultExecuting(ResultExecutingContext filterContext)
         {
             if (filterContext.Result is ViewResult)

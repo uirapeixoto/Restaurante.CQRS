@@ -8,7 +8,6 @@ namespace Restaurante.Infra.Context
             : base("name=CafeContext")
         {
             Configuration.LazyLoadingEnabled = false;
-
         }
 
         public virtual DbSet<TB_MENU_ITEM> TB_MENU_ITEM { get; set; }
