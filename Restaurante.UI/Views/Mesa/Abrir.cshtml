@@ -5,15 +5,16 @@
     var garcons = ViewBag.Garcons;
 }
 
-<h2>Abrir Mesa</h2>
-
+<h3>Abrir Mesa</h3>
+<hr />
 @using (Html.BeginForm())
 {
+
     <fieldset>
         <div class="form-horizontal">
             <div class="form-group">
                 @Html.LabelFor(model => model.NumMesa)
-                @Html.TextBoxFor(model => model.NumMesa, new { @class="form-control"})
+                @Html.TextBoxFor(model => model.NumMesa, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.NumMesa, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">

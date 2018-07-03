@@ -168,6 +168,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CozinhaController.cs" />
+    <Compile Include="Controllers\GarcomController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MesaController.cs" />
     <Compile Include="Global.asax.cs">
@@ -222,10 +224,13 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Garcons\Tarefa.cshtml" />
     <Content Include="Views\Mesa\Abrir.cshtml" />
+    <Content Include="Views\Garcom\Tarefa.cshtml" />
+    <Content Include="Views\Mesa\Status.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Cozinha\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

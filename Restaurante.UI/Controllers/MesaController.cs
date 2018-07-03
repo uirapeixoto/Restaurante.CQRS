@@ -35,5 +35,10 @@ namespace Restaurante.UI.Controllers
 
             return View(mesa);
         }
+
+        public ActionResult Status()
+        {
+            return View();
+        }
     }
 }
