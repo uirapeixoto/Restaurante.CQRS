@@ -16,6 +16,8 @@ namespace Restaurante.UI.ViewModel
         public bool Ativo { get; set; }
         public DateTime? DataServico {get; set;}
 
+
+
         public MesaAbertaViewModel()
         {
             Pedidos = new List<PedidoViewModel>();

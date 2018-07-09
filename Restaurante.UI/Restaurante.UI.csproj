@@ -180,6 +180,7 @@
     <Compile Include="ViewModel\GarcomViewModel.cs" />
     <Compile Include="ViewModel\MenuItemViewModel.cs" />
     <Compile Include="ViewModel\MesaAbertaViewModel.cs" />
+    <Compile Include="ViewModel\MesaStatus.cs" />
     <Compile Include="ViewModel\PedidoItemViewModel.cs" />
     <Compile Include="ViewModel\PedidoViewModel.cs" />
     <Compile Include="ViewModel\TarefaListaGrupoViewModel.cs" />
