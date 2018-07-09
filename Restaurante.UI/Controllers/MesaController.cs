@@ -114,10 +114,10 @@ namespace Restaurante.UI.Controllers
                 },
                 NumMesa = mesa.NumMesa,
                 Pedidos = pedidos,
-                DataServico = mesa.
-            }
+                DataServico = mesa.DataServico
+            };
 
-            return View();
+            return View(mesaAberta);
         }
     }
 }
