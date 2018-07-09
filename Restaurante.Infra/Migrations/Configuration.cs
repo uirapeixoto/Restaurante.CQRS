@@ -4,14 +4,14 @@ namespace Restaurante.Infra.Migrations
     using System;
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Restaurante.Infra.Context.CafeContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Restaurante.Infra.Context.CafeContexold>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Restaurante.Infra.Context.CafeContext context)
+        protected override void Seed(Restaurante.Infra.Context.CafeContexold context)
         {
             //  This method will be called after migrating to the latest version.
 

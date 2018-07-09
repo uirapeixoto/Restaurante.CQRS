@@ -49,8 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\CafeContext.cs" />
     <Compile Include="Context\ICafeContext.cs" />
+    <Compile Include="Context\CafeContext.cs" />
     <Compile Include="Context\TB_MENU_ITEM.cs" />
     <Compile Include="Context\TB_ORDERED.cs" />
     <Compile Include="Context\TB_ORDERED_ITEM.cs" />

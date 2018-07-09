@@ -18,6 +18,15 @@ namespace Restaurante.Infra.Context
 
         public int ID_MENU_ITEM { get; set; }
 
+
+        public decimal? NU_PRICE_ADJUSTIMENT { get; set; }
+
+        public bool? ST_TO_SERVE { get; set; }
+
+        public bool? ST_IN_PREPARATION { get; set; }
+
+        public bool? ST_SERVED { get; set; }
+
         [Required]
         [StringLength(200)]
         public string DS_DESCRIPTION { get; set; }

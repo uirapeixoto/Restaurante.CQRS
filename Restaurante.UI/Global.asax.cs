@@ -28,7 +28,7 @@ namespace Restaurante.UI
             container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
 
             //Registrando o contexto
-            container.Register<ICafeContext, CafeContext>(Lifestyle.Scoped);
+            container.Register<ICafeContext, CafeContexold>(Lifestyle.Scoped);
 
             //Registrando as query Handlers
             typeof(MesaAbertaQueryHandler).Assembly.GetExportedTypes()

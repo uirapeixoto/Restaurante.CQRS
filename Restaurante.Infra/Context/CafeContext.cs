@@ -1,6 +1,9 @@
 namespace Restaurante.Infra.Context
 {
+    using System;
     using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
 
     public partial class CafeContext : DbContext, ICafeContext
     {
@@ -9,6 +12,7 @@ namespace Restaurante.Infra.Context
         {
             Configuration.LazyLoadingEnabled = false;
         }
+
 
         public virtual DbSet<TB_MENU_ITEM> TB_MENU_ITEM { get; set; }
         public virtual DbSet<TB_ORDERED> TB_ORDERED { get; set; }
