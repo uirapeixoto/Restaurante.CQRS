@@ -226,6 +226,7 @@
     <Content Include="Views\Mesa\Abrir.cshtml" />
     <Content Include="Views\Garcom\Tarefa.cshtml" />
     <Content Include="Views\Mesa\Status.cshtml" />
+    <Content Include="Views\Mesa\Pedido.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -246,6 +247,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Restaurante.Command\Restaurante.Command.csproj">
+      <Project>{F90D4A5B-3574-4975-B316-D814EBFD6B66}</Project>
+      <Name>Restaurante.Command</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Restaurante.Contract\Restaurante.Contract.csproj">
       <Project>{D62A4424-6D28-49AD-B2E5-AD1499FC2C76}</Project>
       <Name>Restaurante.Contract</Name>

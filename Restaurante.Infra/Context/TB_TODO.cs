@@ -10,7 +10,7 @@ namespace Restaurante.Infra.Context
     {
         public int ID { get; set; }
 
-        public int ID_TABLE { get; set; }
+        public int ID_TAB_OPENED { get; set; }
 
         public int ID_ORDERED { get; set; }
 

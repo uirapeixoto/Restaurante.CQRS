@@ -34,20 +34,7 @@ namespace Restaurante.Tests
             return events;
         }
 
-        protected Func<TAggregate, object> When<TCommand>(TCommand command)
-        {
-            return agg =>
-            {
-                try
-                {
-                    return DispatchCommand(command).Cast<object>().ToArray();
-                }
-                catch (Exception e)
-                {
-                    return e;
-                }
-            };
-        }
+        
 
         protected Action<object> Then(params object[] expectedEvents)
         {
@@ -106,16 +93,7 @@ namespace Restaurante.Tests
             };
         }
 
-        private IEnumerable DispatchCommand<TCommand>(TCommand c)
-        {
-            var handler = sut as IHandleCommand<TCommand>;
-            if (handler == null)
-                throw new CommandHandlerNotDefiendException(string.Format(
-                    "Aggregate {0} does not yet handle command {1}",
-                    sut.GetType().Name, c.GetType().Name));
-            return handler.Handle(c);
-        }
-
+        
         private TAggregate ApplyEvents(TAggregate agg, IEnumerable events)
         {
             agg.ApplyEvents(events);

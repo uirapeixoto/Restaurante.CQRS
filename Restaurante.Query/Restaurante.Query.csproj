@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Handler\GarcomListQueryHandler.cs" />
+    <Compile Include="Handler\MenuListQueryHandler.cs" />
     <Compile Include="Handler\MesaAbertaListQueryHandler.cs" />
     <Compile Include="Handler\MesaAbertaQueryHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

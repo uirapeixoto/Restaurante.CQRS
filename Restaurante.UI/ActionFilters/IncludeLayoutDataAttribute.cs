@@ -18,6 +18,15 @@ namespace Restaurante.UI.ActionFilters
             }
         }
 
+        private IQueryHandler<IEnumerable<MesaAbertaQueryResult>> _mesasAbertas
+        {
+            get
+            {
+                return DependencyResolver.Current.GetService<IQueryHandler<IEnumerable<MesaAbertaQueryResult>>>();
+            }
+            
+        }
+
         public override void OnResultExecuting(ResultExecutingContext filterContext)
         {
             if (filterContext.Result is ViewResult)
@@ -36,11 +45,19 @@ namespace Restaurante.UI.ActionFilters
                 {
                     list.Add(item.Nome);
                 }
+                var mesas = _mesasAbertas.Handle().Select(o => o.Id);
+                var listaMesas = new List<int>();
+                foreach (var item in mesas)
+                {
+                    listaMesas.Add(item);
+                }
+
                 bag.Garcons = garcons;
                 bag.GarconsStr = list;
-                bag.ActiveTables = new List<int>();
-                bag.MesasAtivas = OpenTabQueries.ActiveTableNumbers;
+                bag.ActiveTables = listaMesas;
+            bag.MesasAtivas = OpenTabQueries.ActiveTableNumbers;
             }
         }
+
     }
 }

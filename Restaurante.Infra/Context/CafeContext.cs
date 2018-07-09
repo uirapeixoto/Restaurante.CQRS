@@ -5,7 +5,7 @@ namespace Restaurante.Infra.Context
     public partial class CafeContext : DbContext, ICafeContext
     {
         public CafeContext()
-            : base("name=CafeContext")
+           : base("name=CafeContext")
         {
             Configuration.LazyLoadingEnabled = false;
         }
@@ -49,7 +49,7 @@ namespace Restaurante.Infra.Context
             modelBuilder.Entity<TB_TAB_OPENED>()
                 .HasMany(e => e.TB_TODO)
                 .WithRequired(e => e.TB_TAB_OPENED)
-                .HasForeignKey(e => e.ID_TABLE)
+                .HasForeignKey(e => e.ID_TAB_OPENED)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<TB_WAITSTAFF>()

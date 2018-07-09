@@ -1,4 +1,5 @@
-﻿using Restaurante.Infra.Context;
+﻿using Restaurante.Command.Mesas.Handler;
+using Restaurante.Infra.Context;
 using Restaurante.IOC;
 using Restaurante.Query.Handler;
 using SimpleInjector;
@@ -31,6 +32,12 @@ namespace Restaurante.UI
 
             //Registrando as query Handlers
             typeof(MesaAbertaQueryHandler).Assembly.GetExportedTypes()
+                .Where(x => x.Namespace.EndsWith("Handler"))
+                .Where(x => x.GetInterfaces().Any())
+                .ToList()
+                .ForEach(x => container.Register(x.GetInterfaces().Single(), x, Lifestyle.Transient));
+
+            typeof(AbrirMesaCommandHandler).Assembly.GetExportedTypes()
                 .Where(x => x.Namespace.EndsWith("Handler"))
                 .Where(x => x.GetInterfaces().Any())
                 .ToList()

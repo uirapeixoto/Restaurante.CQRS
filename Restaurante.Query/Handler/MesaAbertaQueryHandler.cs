@@ -25,6 +25,7 @@ namespace Restaurante.Query.Handler
                 .AsParallel()
                 .Select(o => new MesaAbertaQueryResult(
                     o.ID,
+                    o.NU_TABLE.Value,
                     new GarcomQueryResult(o.TB_WAITSTAFF.ID, o.TB_WAITSTAFF.DS_NAME),
                     null,
                     o.ST_ACTIVE

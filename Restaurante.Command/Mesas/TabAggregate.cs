@@ -9,9 +9,7 @@ using System.Linq;
 
 namespace Restaurante.Command
 {
-    public class TabAggregate : Aggregate, 
-        IHandleCommand<OpenTab>, 
-        IHandleCommand<PlaceOrder>,
+    public class TabAggregate : Aggregate,
         IApplyEvent<TabOpened>
     {
         private bool _open = false;

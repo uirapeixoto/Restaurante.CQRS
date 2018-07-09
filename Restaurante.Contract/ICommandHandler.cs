@@ -2,8 +2,13 @@
 
 namespace Restaurante.Contract
 {
-    public interface IHandleCommand<TCommand>
+    public interface ICommandHandler<TCommand>
     {
-        IEnumerable Handle(TCommand c);
+        void Handle(TCommand c);
+    }
+
+    public interface ICommandHandler<in TCommand, out TCommandResult> where TCommand : ICommand
+    {
+        TCommandResult Handle(TCommand c);
     }
 }

@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Garcom\Garcom.cs" />
     <Compile Include="Mesa\OpenTabQueries.cs" />
     <Compile Include="Mesa\TabNotOpen.cs" />
     <Compile Include="Pedido\OrderedItem.cs" />

@@ -48,6 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Mesas\CommandResult\AbrirMesaCommandResult.cs" />
+    <Compile Include="Mesas\Command\AbrirMesaCommand.cs" />
+    <Compile Include="Mesas\Command\IncluirGarcomCommand.cs" />
+    <Compile Include="Mesas\Handler\AbrirMesaCommandHandler.cs" />
     <Compile Include="Mesas\TabAggregate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -64,10 +68,15 @@
       <Project>{553638B8-3264-4187-AB78-91B37337E9E7}</Project>
       <Name>Restaurante.Events</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Restaurante.Infra\Restaurante.Infra.csproj">
+      <Project>{6BA0BDF3-E23D-4593-8D53-FCFAE5B82B79}</Project>
+      <Name>Restaurante.Infra</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

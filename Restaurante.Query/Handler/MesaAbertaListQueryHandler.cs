@@ -20,12 +20,13 @@ namespace Restaurante.Query.Handler
         {
             var result = _context.TB_TAB_OPENED
                 .Include(p => p.TB_ORDERED)
-                .Include(g => g.ID_WAITER)
+                .Include(g => g.TB_WAITSTAFF)
                 .AsNoTracking()
                 .Where(e => e.ST_ACTIVE)
                 .AsParallel()
                 .Select(o => new MesaAbertaQueryResult(
                     o.ID,
+                    o.NU_TABLE.Value,
                     new GarcomQueryResult(o.TB_WAITSTAFF.ID, o.TB_WAITSTAFF.DS_NAME),
                     null,
                     o.ST_ACTIVE

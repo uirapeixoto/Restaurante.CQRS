@@ -1,4 +1,6 @@
-﻿using Restaurante.Contract;
+﻿using Restaurante.Command.Mesas.Command;
+using Restaurante.Command.Mesas.CommandResult;
+using Restaurante.Contract;
 using Restaurante.Query.Result;
 using Restaurante.UI.ActionFilters;
 using Restaurante.UI.ViewModel;
@@ -12,9 +14,18 @@ namespace Restaurante.UI.Controllers
     public class MesaController : Controller
     {
         readonly IQueryHandler<IEnumerable<GarcomQueryResult>> _garconsListHandler;
-        public MesaController(IQueryHandler<IEnumerable<GarcomQueryResult>> garconsListHandler)
+        readonly ICommandHandler<AbrirMesaCommand, AbrirMesaCommandResult> _abrirMesaComandHandler;
+
+        readonly IQueryHandler<IEnumerable<MenuItemQueryResult>> _menuItemQueryHandler;
+
+        public MesaController(
+            IQueryHandler<IEnumerable<GarcomQueryResult>> garconsListHandler,
+            ICommandHandler<AbrirMesaCommand, AbrirMesaCommandResult> abrirMesaComandHandler,
+            IQueryHandler<IEnumerable<MenuItemQueryResult>> menuItemQueryHandler)
         {
             _garconsListHandler = garconsListHandler;
+            _abrirMesaComandHandler = abrirMesaComandHandler;
+            _menuItemQueryHandler = menuItemQueryHandler;
         }
 
         // GET: Mesa
@@ -23,8 +34,11 @@ namespace Restaurante.UI.Controllers
             return View();
         }
 
-        public ActionResult Abrir(MesaAbertaViewModel mesa)
+        public ActionResult Abrir()
         {
+
+            var mesa = new MesaAbertaViewModel();
+
             var result = _garconsListHandler
                 .Handle();
 
@@ -34,6 +48,38 @@ namespace Restaurante.UI.Controllers
             }
 
             return View(mesa);
+        }
+
+        [HttpPost]
+        public ActionResult Abrir(MesaAbertaViewModel mesa)
+        {
+
+            var result = _abrirMesaComandHandler.Handle(new AbrirMesaCommand(mesa.NumMesa,mesa.Garcom.Id));
+            var mesaAberta = new MesaAbertaViewModel
+            {
+                Id = result.Id
+            };
+            return RedirectToAction("Pedido","Mesa",mesaAberta.Id);
+        }
+
+        public ActionResult Selecionar(int Id)
+        {
+            
+
+            return View();
+        }
+
+        public ActionResult Pedido()
+        {
+            var menu = _menuItemQueryHandler.Handle().Select(o => new MenuItemViewModel
+            {
+                Id = o.Id,
+                NumMenuItem = o.NumMenuItem,
+                Descricao = o.Descricao,
+                Bebida = o.Bebida,
+            });
+
+            return View(menu);
         }
 
         public ActionResult Status()
