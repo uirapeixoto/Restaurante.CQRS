@@ -1,6 +1,7 @@
 ﻿using Restaurante.Command.Mesas.Command;
 using Restaurante.Command.Mesas.CommandResult;
 using Restaurante.Contract;
+using Restaurante.Query.Query;
 using Restaurante.Query.Result;
 using Restaurante.UI.ActionFilters;
 using Restaurante.UI.ViewModel;
@@ -15,17 +16,19 @@ namespace Restaurante.UI.Controllers
     {
         readonly IQueryHandler<IEnumerable<GarcomQueryResult>> _garconsListHandler;
         readonly ICommandHandler<AbrirMesaCommand, AbrirMesaCommandResult> _abrirMesaComandHandler;
-
         readonly IQueryHandler<IEnumerable<MenuItemQueryResult>> _menuItemQueryHandler;
+        readonly IQueryHandler<MesaAbertaQuery, MesaAbertaQueryResult> _mesaAbertaQueryHandler;
 
         public MesaController(
             IQueryHandler<IEnumerable<GarcomQueryResult>> garconsListHandler,
             ICommandHandler<AbrirMesaCommand, AbrirMesaCommandResult> abrirMesaComandHandler,
-            IQueryHandler<IEnumerable<MenuItemQueryResult>> menuItemQueryHandler)
+            IQueryHandler<IEnumerable<MenuItemQueryResult>> menuItemQueryHandler,
+            IQueryHandler<MesaAbertaQuery, MesaAbertaQueryResult> mesaAbertaQueryHandler)
         {
             _garconsListHandler = garconsListHandler;
             _abrirMesaComandHandler = abrirMesaComandHandler;
             _menuItemQueryHandler = menuItemQueryHandler;
+            _mesaAbertaQueryHandler = mesaAbertaQueryHandler;
         }
 
         // GET: Mesa
@@ -81,9 +84,39 @@ namespace Restaurante.UI.Controllers
 
             return View(menu);
         }
-
-        public ActionResult Status()
+        [HttpPost]
+        public ActionResult Fechar()
         {
+            return View();
+        }
+
+        public ActionResult Status(int id)
+        {
+            var mesa = _mesaAbertaQueryHandler.Handle(new MesaAbertaQuery(id));
+            var pedidos = mesa.Pedidos.Select(x => new PedidoViewModel
+            {
+                Id = x.Id,
+                PedidoItem = null
+            });
+
+            var itensPedido = mesa.Pedidos.Select(x => new PedidoItemViewModel
+            {
+                Id = x.Id,
+                MenuItem = null,
+            });
+            var mesaAberta = new MesaAbertaViewModel
+            {
+                Id = mesa.Id,
+                Garcom = new GarcomViewModel
+                {
+                    Id = mesa.Garcom.Id,
+                    Nome = mesa.Garcom.Nome
+                },
+                NumMesa = mesa.NumMesa,
+                Pedidos = pedidos,
+                DataServico = mesa.
+            }
+
             return View();
         }
     }

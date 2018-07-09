@@ -58,9 +58,9 @@
     <Compile Include="Context\TB_TAB_OPENED.cs" />
     <Compile Include="Context\TB_TODO.cs" />
     <Compile Include="Context\TB_WAITSTAFF.cs" />
-    <Compile Include="Migrations\201807031417047_Initial.cs" />
-    <Compile Include="Migrations\201807031417047_Initial.Designer.cs">
-      <DependentUpon>201807031417047_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201807090438478_estruturaPedidos.cs" />
+    <Compile Include="Migrations\201807090438478_estruturaPedidos.Designer.cs">
+      <DependentUpon>201807090438478_estruturaPedidos.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,8 +79,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807031417047_Initial.resx">
-      <DependentUpon>201807031417047_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807090438478_estruturaPedidos.resx">
+      <DependentUpon>201807090438478_estruturaPedidos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

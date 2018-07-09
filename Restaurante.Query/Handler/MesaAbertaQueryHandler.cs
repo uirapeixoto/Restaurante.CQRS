@@ -28,6 +28,7 @@ namespace Restaurante.Query.Handler
                     o.NU_TABLE.Value,
                     new GarcomQueryResult(o.TB_WAITSTAFF.ID, o.TB_WAITSTAFF.DS_NAME),
                     null,
+                    o.DT_SERVICE,
                     o.ST_ACTIVE
                     )).FirstOrDefault();
 

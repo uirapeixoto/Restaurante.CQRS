@@ -5,12 +5,10 @@ namespace Restaurante.Query.Query
     public class MesaAbertaQuery : IQuery
     {
         public int Id { get; }
-        public int NumMesa { get; }
 
-        public MesaAbertaQuery(int id, int numMesa)
+        public MesaAbertaQuery(int id)
         {
             Id = id;
-            NumMesa = numMesa;
         }
     }
 }
