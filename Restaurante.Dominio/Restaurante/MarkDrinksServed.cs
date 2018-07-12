@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Restaurante.Dominio.Restaurante
+namespace Restaurante.Dominio
 {
     public class MarkDrinksServed
     {

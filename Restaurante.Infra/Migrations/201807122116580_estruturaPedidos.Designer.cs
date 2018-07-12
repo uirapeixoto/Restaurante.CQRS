@@ -13,7 +13,7 @@ namespace Restaurante.Infra.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201807090438478_estruturaPedidos"; }
+            get { return "201807122116580_estruturaPedidos"; }
         }
         
         string IMigrationMetadata.Source

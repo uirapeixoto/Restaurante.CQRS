@@ -32,7 +32,6 @@ namespace Restaurante.Query.Handler
             {
                 throw ex;
             }
-
         }
     }
 }

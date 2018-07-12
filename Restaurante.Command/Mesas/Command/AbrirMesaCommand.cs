@@ -1,5 +1,5 @@
 ﻿using Restaurante.Contract;
-using Restaurante.Dominio.Garcom;
+using Restaurante.Dominio;
 using System;
 
 namespace Restaurante.Command.Mesas.Command

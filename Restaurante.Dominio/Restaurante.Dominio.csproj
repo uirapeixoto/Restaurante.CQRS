@@ -47,13 +47,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Garcom\Garcom.cs" />
+    <Compile Include="Mesa\MesaAberta.cs" />
     <Compile Include="Mesa\OpenTabQueries.cs" />
     <Compile Include="Mesa\TabNotOpen.cs" />
     <Compile Include="Pedido\OrderedItem.cs" />
+    <Compile Include="Pedido\Pedido.cs" />
+    <Compile Include="Pedido\PedidoItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Mesa\OpenTab.cs" />
     <Compile Include="Mesa\TabOpened.cs" />
     <Compile Include="Restaurante\MarkDrinksServed.cs" />
+    <Compile Include="Restaurante\MenuItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

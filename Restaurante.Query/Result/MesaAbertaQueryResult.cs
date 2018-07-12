@@ -9,7 +9,7 @@ namespace Restaurante.Query.Result
         public int Id { get; }
         public int NumMesa { get; }
         public GarcomQueryResult Garcom { get; }
-        public IEnumerable<PedidoQueryResult> Pedidos { get; }
+        public IEnumerable<PedidoQueryResult> Pedidos { get; set; }
         public DateTime? DataServico { get; }
         public bool Ativo { get; }
 

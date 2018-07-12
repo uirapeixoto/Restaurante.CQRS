@@ -8,16 +8,11 @@ namespace Restaurante.Infra.Context
 
     public partial class TB_ORDERED_ITEM
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TB_ORDERED_ITEM()
-        {
-            TB_ORDERED = new HashSet<TB_ORDERED>();
-        }
-
         public int ID { get; set; }
 
         public int ID_MENU_ITEM { get; set; }
 
+        public int ID_ORDERED { get; set; }
 
         public decimal? NU_PRICE_ADJUSTIMENT { get; set; }
 
@@ -35,7 +30,6 @@ namespace Restaurante.Infra.Context
 
         public virtual TB_MENU_ITEM TB_MENU_ITEM { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TB_ORDERED> TB_ORDERED { get; set; }
+        public virtual TB_ORDERED TB_ORDERED { get; set; }
     }
 }

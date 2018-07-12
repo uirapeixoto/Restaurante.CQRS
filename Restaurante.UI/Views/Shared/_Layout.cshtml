@@ -31,18 +31,18 @@
     <div class="container body-content">
         <div class="col-lg-4">
             <div class="well sidebar-nav">
-                <ul class="nav nav-list">
-                    <li class="nav-header">Tarefas dos Garçons</li>
-                    @foreach (var g in ViewBag.GarconsStr as List<string>)
-                    {
-                        <li>@Html.ActionLink(g, "Tarefa", "Garcom", new { id = g }, null)</li>
-                    }
-                    <li class="nav-header">Open Tabs</li>
-                    @foreach (var t in ViewBag.ActiveTables as List<int>)
-                    {
-                        <li>@Html.ActionLink(t.ToString(), "Status", "Mesa", new { id = t }, null)</li>
-                    }
-                </ul>
+                    <ul class="nav nav-list">
+                        <li class="nav-header">Tarefas dos Garçons</li>
+                        @foreach (var g in ViewBag.GarconsStr as List<string>)
+                        {
+                            <li>@Html.ActionLink(g, "Tarefa", "Garcom", new { id = g }, null)</li>
+                        }
+                        <li class="nav-header">Open Tabs</li>
+                        @foreach (var t in ViewBag.ActiveTables as List<int>)
+                        {
+                            <li>@Html.ActionLink(t.ToString(), "Status", "Mesa", new { id = t }, null)</li>
+                        }
+                    </ul>
             </div><!--/.well -->
         </div>
         <div class="col-lg-8">

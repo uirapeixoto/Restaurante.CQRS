@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using Restaurante.Command;
-using Restaurante.Dominio.Pedido;
+using Restaurante.Dominio;
 using System;
 
 namespace Restaurante.Tests

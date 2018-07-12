@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Restaurante.Dominio.Mesa
+namespace Restaurante.Dominio
 {
     public static class OpenTabQueries
     {

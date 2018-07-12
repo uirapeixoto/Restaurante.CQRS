@@ -28,6 +28,7 @@ namespace Restaurante.Infra.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         ID_MENU_ITEM = c.Int(nullable: false),
+                        ID_ORDERED = c.Int(nullable: false),
                         NU_PRICE_ADJUSTIMENT = c.Decimal(precision: 18, scale: 2),
                         ST_TO_SERVE = c.Boolean(),
                         ST_IN_PREPARATION = c.Boolean(),
@@ -36,8 +37,10 @@ namespace Restaurante.Infra.Migrations
                         DT_SERVICE = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.TB_ORDERED", t => t.ID_ORDERED)
                 .ForeignKey("dbo.TB_MENU_ITEM", t => t.ID_MENU_ITEM)
-                .Index(t => t.ID_MENU_ITEM);
+                .Index(t => t.ID_MENU_ITEM)
+                .Index(t => t.ID_ORDERED);
             
             CreateTable(
                 "dbo.TB_ORDERED",
@@ -45,14 +48,11 @@ namespace Restaurante.Infra.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         ID_TAB_OPENED = c.Int(nullable: false),
-                        ID_ORDERED_ITEM = c.Int(nullable: false),
                         DT_SERVICE = c.DateTime(),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.TB_TAB_OPENED", t => t.ID_TAB_OPENED)
-                .ForeignKey("dbo.TB_ORDERED_ITEM", t => t.ID_ORDERED_ITEM)
-                .Index(t => t.ID_TAB_OPENED)
-                .Index(t => t.ID_ORDERED_ITEM);
+                .Index(t => t.ID_TAB_OPENED);
             
             CreateTable(
                 "dbo.TB_TAB_OPENED",
@@ -110,14 +110,14 @@ namespace Restaurante.Infra.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.TB_ORDERED_ITEM", "ID_MENU_ITEM", "dbo.TB_MENU_ITEM");
-            DropForeignKey("dbo.TB_ORDERED", "ID_ORDERED_ITEM", "dbo.TB_ORDERED_ITEM");
             DropForeignKey("dbo.TB_TAB_OPENED", "ID_WAITER", "dbo.TB_WAITSTAFF");
             DropForeignKey("dbo.TB_TODO", "ID_TAB_OPENED", "dbo.TB_TAB_OPENED");
             DropForeignKey("dbo.TB_ORDERED", "ID_TAB_OPENED", "dbo.TB_TAB_OPENED");
+            DropForeignKey("dbo.TB_ORDERED_ITEM", "ID_ORDERED", "dbo.TB_ORDERED");
             DropIndex("dbo.TB_TODO", new[] { "ID_TAB_OPENED" });
             DropIndex("dbo.TB_TAB_OPENED", new[] { "ID_WAITER" });
-            DropIndex("dbo.TB_ORDERED", new[] { "ID_ORDERED_ITEM" });
             DropIndex("dbo.TB_ORDERED", new[] { "ID_TAB_OPENED" });
+            DropIndex("dbo.TB_ORDERED_ITEM", new[] { "ID_ORDERED" });
             DropIndex("dbo.TB_ORDERED_ITEM", new[] { "ID_MENU_ITEM" });
             DropTable("dbo.TB_TAB_CLOSED");
             DropTable("dbo.TB_WAITSTAFF");

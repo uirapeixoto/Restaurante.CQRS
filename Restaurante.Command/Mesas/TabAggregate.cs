@@ -1,6 +1,5 @@
 ﻿using Restaurante.Contract;
-using Restaurante.Dominio.Mesa;
-using Restaurante.Dominio.Restaurante;
+using Restaurante.Dominio;
 using Restaurante.Events;
 using Restaurante.Events.Mesas;
 using System.Collections;

@@ -75,6 +75,10 @@
       <Project>{d62a4424-6d28-49ad-b2e5-ad1499fc2c76}</Project>
       <Name>Restaurante.Contract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Restaurante.Dominio\Restaurante.Dominio.csproj">
+      <Project>{CFCDCAB1-E341-4C3D-A9FF-0C6B42F7AE5F}</Project>
+      <Name>Restaurante.Dominio</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Restaurante.Infra\Restaurante.Infra.csproj">
       <Project>{6BA0BDF3-E23D-4593-8D53-FCFAE5B82B79}</Project>
       <Name>Restaurante.Infra</Name>

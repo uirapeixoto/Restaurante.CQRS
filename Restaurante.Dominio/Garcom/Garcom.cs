@@ -1,4 +1,4 @@
-﻿namespace Restaurante.Dominio.Garcom
+﻿namespace Restaurante.Dominio
 {
     public class Garcom
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Restaurante.Dominio.Mesa
+namespace Restaurante.Dominio
 {
     public class OpenTab
     {

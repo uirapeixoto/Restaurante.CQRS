@@ -1,4 +1,4 @@
-﻿namespace Restaurante.Dominio.Pedido
+﻿namespace Restaurante.Dominio
 {
     public class OrderedItem
     {

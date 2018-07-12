@@ -1,18 +1,13 @@
 namespace Restaurante.Infra.Context
 {
-    using System;
     using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
 
     public partial class CafeContext : DbContext, ICafeContext
     {
         public CafeContext()
-           : base("name=CafeContext")
+            : base("name=CafeContext")
         {
-            Configuration.LazyLoadingEnabled = false;
         }
-
 
         public virtual DbSet<TB_MENU_ITEM> TB_MENU_ITEM { get; set; }
         public virtual DbSet<TB_ORDERED> TB_ORDERED { get; set; }
@@ -34,15 +29,15 @@ namespace Restaurante.Infra.Context
                 .HasForeignKey(e => e.ID_MENU_ITEM)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<TB_ORDERED>()
+                .HasMany(e => e.TB_ORDERED_ITEM)
+                .WithRequired(e => e.TB_ORDERED)
+                .HasForeignKey(e => e.ID_ORDERED)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<TB_ORDERED_ITEM>()
                 .Property(e => e.DS_DESCRIPTION)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<TB_ORDERED_ITEM>()
-                .HasMany(e => e.TB_ORDERED)
-                .WithRequired(e => e.TB_ORDERED_ITEM)
-                .HasForeignKey(e => e.ID_ORDERED_ITEM)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<TB_TAB_OPENED>()
                 .HasMany(e => e.TB_ORDERED)

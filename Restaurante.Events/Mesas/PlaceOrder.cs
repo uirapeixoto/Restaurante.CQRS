@@ -1,4 +1,4 @@
-﻿using Restaurante.Dominio.Pedido;
+﻿using Restaurante.Dominio;
 using System;
 using System.Collections.Generic;
 

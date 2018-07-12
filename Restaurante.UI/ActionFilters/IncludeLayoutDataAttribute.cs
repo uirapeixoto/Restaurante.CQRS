@@ -1,5 +1,5 @@
 ﻿using Restaurante.Contract;
-using Restaurante.Dominio.Mesa;
+using Restaurante.Dominio;
 using Restaurante.Query.Result;
 using Restaurante.UI.ViewModel;
 using System.Collections.Generic;
