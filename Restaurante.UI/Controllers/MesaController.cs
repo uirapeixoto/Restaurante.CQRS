@@ -67,8 +67,6 @@ namespace Restaurante.UI.Controllers
 
         public ActionResult Selecionar(int Id)
         {
-            
-
             return View();
         }
 
@@ -82,7 +80,21 @@ namespace Restaurante.UI.Controllers
                 Bebida = o.Bebida,
             });
 
-            return View(menu);
+            var pedido = new PedidoViewModel
+            {
+                PedidoItens = menu.Select(m => new PedidoItemViewModel {
+                    MenuItem = new MenuItemViewModel
+                    {
+                        Id = m.Id,
+                        NumMenuItem = m.NumMenuItem,
+                        Descricao = m.Descricao,
+                        Bebida = m.Bebida,
+                        Ativo = m.Ativo
+                    }
+                })
+            };
+
+            return View(pedido);
         }
         [HttpPost]
         public ActionResult Fechar()
@@ -99,25 +111,15 @@ namespace Restaurante.UI.Controllers
                 PedidoItem = null
             });
 
-            var itensPedido = mesa.Pedidos.Select(x => new PedidoItemViewModel
+            var mesaStatus = new MesaStatusViewModel
             {
-                Id = x.Id,
-                MenuItem = null,
-            });
-            var mesaAberta = new MesaAbertaViewModel
-            {
-                Id = mesa.Id,
-                Garcom = new GarcomViewModel
-                {
-                    Id = mesa.Garcom.Id,
-                    Nome = mesa.Garcom.Nome
-                },
-                NumMesa = mesa.NumMesa,
-                Pedidos = pedidos,
-                DataServico = mesa.DataServico
+               MesaId = mesa.Id,
+               NumMesa = mesa.NumMesa
             };
 
-            return View(mesaAberta);
+            
+            
+            return View(mesaStatus);
         }
     }
 }

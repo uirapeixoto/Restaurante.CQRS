@@ -16,11 +16,11 @@ namespace Restaurante.Infra.Context
 
         public decimal? NU_PRICE_ADJUSTIMENT { get; set; }
 
-        public bool? ST_TO_SERVE { get; set; }
+        public DateTime? DT_TO_SERVE { get; set; }
 
-        public bool? ST_IN_PREPARATION { get; set; }
+        public DateTime? DT_IN_PREPARATION { get; set; }
 
-        public bool? ST_SERVED { get; set; }
+        public DateTime? DT_SERVED { get; set; }
 
         [Required]
         [StringLength(200)]

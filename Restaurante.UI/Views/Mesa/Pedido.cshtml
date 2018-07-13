@@ -1,14 +1,10 @@
-﻿@model IEnumerable<Restaurante.UI.ViewModel.MenuItemViewModel>
+﻿@model Restaurante.UI.ViewModel.PedidoViewModel
 
 @{
     ViewBag.Title = "Pedido";
 }
 
 <h2>Pedido</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 
 <div class="row">
     <div class="col-md-12">
@@ -20,73 +16,79 @@
                 </ul>
             </div>
             <div class="panel-body">
-                <div class="tab-content">
-                    <div class="tab-pane fade in active" id="tab1default">
-                        <table class="table">
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.NumMenuItem)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Descricao)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Bebida)
-                                </th>
-                                <th></th>
-                            </tr>
+                @using (Html.BeginForm())
+                {
+                    <div class="tab-content">
 
-                            @foreach (var item in Model.Where(x => x.Bebida))
-                            {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.NumMenuItem)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Descricao)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Bebida)
-                                </td>
-                            </tr>
-                            }
-
-                        </table>
-                    </div>
-                    <div class="tab-pane fade" id="tab2default">
-                        <table class="table">
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.NumMenuItem)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Descricao)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Bebida)
-                                </th>
-                                <th></th>
-                            </tr>
-
-                            @foreach (var item in Model.Where(x => !x.Bebida))
-                            {
+                        <div class="tab-pane fade in active" id="tab1default">
+                            <table class="table">
                                 <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.NumMenuItem)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Descricao)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Bebida)
-                                    </td>
+                                    <th>
+                                        Nº Menu
+                                    </th>
+                                    <th>
+                                        Descrição
+                                    </th>
+                                    <th>
+                                        Quant
+                                    </th>
+                                    <th></th>
                                 </tr>
-                            }
 
-                        </table>
+                                @foreach (var item in Model.PedidoItens.Where(x => x.MenuItem.Bebida))
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MenuItem.NumMenuItem)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MenuItem.Descricao)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(modelItem => item.Quantidade, new { @class = "number" })
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="tab2default">
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        Nº Menu
+                                    </th>
+                                    <th>
+                                        Descrição
+                                    </th>
+                                    <th>
+                                        Quant
+                                    </th>
+                                    <th></th>
+                                </tr>
+
+                                @foreach (var item in Model.PedidoItens.Where(x => !x.MenuItem.Bebida))
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MenuItem.NumMenuItem)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MenuItem.Descricao)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(modelItem => item.Quantidade, new { @class = "number" })
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="tab3default">Default 3</div>
                     </div>
-                    <div class="tab-pane fade" id="tab3default">Default 3</div>
-                </div>
+                    <button type="submit" class="btn">Fazer Pedido</button>
+                }
+
             </div>
         </div>
     </div>

@@ -1,7 +1,91 @@
-﻿
+﻿@model Restaurante.UI.ViewModel.MesaStatusViewModel
+
 @{
-    ViewBag.Title = "Status";
+    ViewBag.Title = "Tab Status";
 }
 
-<h2>Status</h2>
+<h2>Pedidos para a mesa @Model.NumMesa</h2>
 
+<div>
+    <i class="icon-remove"></i>
+    @Html.ActionLink("FecharMesa", "Fechar", new { id = Model.MesaId })
+</div>
+<div>
+    <i class="icon-plus"></i>
+    @Html.ActionLink("Pedidos", "Pedidos", new { id = Model.MesaId})
+</div>
+
+@if (Model.PedidosAServir.Any())
+{
+    using (Html.BeginForm("MarcarServidos", "Mesa", new { id = Model.NumMesa }))
+    {
+        var i = 0;
+        <h3>Itens para servir</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Menu #</td>
+                    <td>Descrição</td>
+                    <td>Marcar como servido</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.PedidosAServir)
+                {
+                    <tr>
+                        <td>@Model.NumMesa</td>
+                        <td>@item.Descricao</td>
+                        <td>@item.Descricao</td>
+                        <td>@Html.CheckBox(string.Format("served_{0}_{1}", i++, item.Id.ToString()))</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <button type="submit" class="btn">Marcar Como Servido</button>
+    }
+}
+
+@if (Model.PedidosEmPreparacao.Any())
+{
+    <h3>Itens em preparação</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Menu #</td>
+                <td>Descriçao</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.PedidosEmPreparacao)
+            {
+                <tr>
+                    <td>@item.MenuItem.NumMenuItem</td>
+                    <td>@item.Descricao</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (Model.PedidosServidos.Any())
+{
+    <h3>Itens Já Servidos</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Menu #</td>
+                <td>Description</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.PedidosServidos)
+            {
+                <tr>
+                    <td>@item.MenuItem.NumMenuItem</td>
+                    <td>@item.Descricao</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

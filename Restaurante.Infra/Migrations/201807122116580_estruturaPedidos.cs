@@ -30,9 +30,9 @@ namespace Restaurante.Infra.Migrations
                         ID_MENU_ITEM = c.Int(nullable: false),
                         ID_ORDERED = c.Int(nullable: false),
                         NU_PRICE_ADJUSTIMENT = c.Decimal(precision: 18, scale: 2),
-                        ST_TO_SERVE = c.Boolean(),
-                        ST_IN_PREPARATION = c.Boolean(),
-                        ST_SERVED = c.Boolean(),
+                        DT_TO_SERVE = c.DateTime(),
+                        DT_IN_PREPARATION = c.DateTime(),
+                        DT_SERVED = c.DateTime(),
                         DS_DESCRIPTION = c.String(nullable: false, maxLength: 200, unicode: false),
                         DT_SERVICE = c.DateTime(nullable: false),
                     })

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Restaurante.UI.ViewModel
 {
@@ -11,6 +12,9 @@ namespace Restaurante.UI.ViewModel
         public string Descricao { get; set; }
         [Display(Name = "Ajuste")]
         public decimal Ajuste { get; set; }
+        public int Quantidade { get; set; }
+        [Display(Name = "Menu")]
+        public IEnumerable<MenuItemViewModel> MenuItens { get; set; }
 
     }
 }
