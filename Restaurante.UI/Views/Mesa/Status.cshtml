@@ -8,16 +8,16 @@
 
 <div>
     <i class="icon-remove"></i>
-    @Html.ActionLink("FecharMesa", "Fechar", new { id = Model.MesaId })
+    @Html.ActionLink(" Fechar Mesa", "Fechar", new { id = Model.MesaId },new { @class= "glyphicon glyphicon-plus" })
 </div>
 <div>
     <i class="icon-plus"></i>
-    @Html.ActionLink("Pedidos", "Pedidos", new { id = Model.MesaId})
+    @Html.ActionLink(" Pedidos", "Pedido", new { id = Model.MesaId}, new { @class = "glyphicon glyphicon-plus" })
 </div>
 
 @if (Model.PedidosAServir.Any())
 {
-    using (Html.BeginForm("MarcarServidos", "Mesa", new { id = Model.NumMesa }))
+    using (Html.BeginForm("Marcar Como Servidos", "Mesa", new { id = Model.NumMesa }))
     {
         var i = 0;
         <h3>Itens para servir</h3>

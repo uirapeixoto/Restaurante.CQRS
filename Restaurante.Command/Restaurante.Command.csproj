@@ -49,8 +49,11 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Mesas\CommandResult\AbrirMesaCommandResult.cs" />
+    <Compile Include="Mesas\Handler\PedidoCommandHandler.cs" />
     <Compile Include="Mesas\Command\AbrirMesaCommand.cs" />
     <Compile Include="Mesas\Command\IncluirGarcomCommand.cs" />
+    <Compile Include="Mesas\Command\PedidoCommand.cs" />
+    <Compile Include="Mesas\Command\PedidoItemCommand.cs" />
     <Compile Include="Mesas\Handler\AbrirMesaCommandHandler.cs" />
     <Compile Include="Mesas\TabAggregate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

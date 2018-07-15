@@ -33,7 +33,7 @@ namespace Restaurante.Infra.Migrations
                         DT_TO_SERVE = c.DateTime(),
                         DT_IN_PREPARATION = c.DateTime(),
                         DT_SERVED = c.DateTime(),
-                        DS_DESCRIPTION = c.String(nullable: false, maxLength: 200, unicode: false),
+                        DS_DESCRIPTION = c.String(maxLength: 200, unicode: false),
                         DT_SERVICE = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)

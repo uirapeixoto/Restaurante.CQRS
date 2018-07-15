@@ -16,10 +16,11 @@
                 </ul>
             </div>
             <div class="panel-body">
-                @using (Html.BeginForm())
+                @using (Html.BeginForm(null, null, FormMethod.Post))
                 {
-                    <div class="tab-content">
 
+                    <div class="tab-content">
+                        @Html.HiddenFor(m => Model.MesaId)
                         <div class="tab-pane fade in active" id="tab1default">
                             <table class="table">
                                 <tr>
@@ -34,18 +35,23 @@
                                     </th>
                                     <th></th>
                                 </tr>
-
-                                @foreach (var item in Model.PedidoItens.Where(x => x.MenuItem.Bebida))
+                                @{
+                                    int t1 = Model.PedidoBebidaItens.Count();
+                                    int t2 = Model.PedidoComidaItens.Count();
+                                }
+                                @for (var i = 0; i < t1; i++)
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.MenuItem.NumMenuItem)
+                                            @Html.DisplayFor(m => m.PedidoBebidaItens[i].MenuItem.NumMenuItem)
+                                            @Html.HiddenFor(m => m.PedidoBebidaItens[i].MenuItem.NumMenuItem)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.MenuItem.Descricao)
+                                            @Html.DisplayFor(m => m.PedidoBebidaItens[i].MenuItem.Descricao)
+                                            @Html.HiddenFor(m => m.PedidoBebidaItens[i].MenuItem.Descricao)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(modelItem => item.Quantidade, new { @class = "number" })
+                                            @Html.EditorFor(m => m.PedidoBebidaItens[i].Quantidade, new { @class = "number" })
                                         </td>
                                     </tr>
                                 }
@@ -67,17 +73,19 @@
                                     <th></th>
                                 </tr>
 
-                                @foreach (var item in Model.PedidoItens.Where(x => !x.MenuItem.Bebida))
+                                @for (var i = 0; i < t2; i++)
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.MenuItem.NumMenuItem)
+                                            @Html.DisplayFor(m => m.PedidoComidaItens[i].MenuItem.NumMenuItem)
+                                            @Html.HiddenFor(m => m.PedidoComidaItens[i].MenuItem.NumMenuItem)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.MenuItem.Descricao)
+                                            @Html.DisplayFor(m => m.PedidoComidaItens[i].MenuItem.Descricao)
+                                            @Html.HiddenFor(m => m.PedidoComidaItens[i].MenuItem.Descricao)
                                         </td>
                                         <td>
-                                            @Html.EditorFor(modelItem => item.Quantidade, new { @class = "number" })
+                                            @Html.EditorFor(m => m.PedidoComidaItens[i].Quantidade, new { @class = "number" })
                                         </td>
                                     </tr>
                                 }

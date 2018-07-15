@@ -1,18 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using Restaurante.UI.Helper;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Restaurante.UI.ViewModel
 {
-    public class PedidoViewModel
+    public class PedidoViewModel : EnumerableHelper
     {
         public int Id { get; set; }
+        public int MesaId { get; set; }
         public PedidoItemViewModel PedidoItem { get; set; }
-
-        public IEnumerable<PedidoItemViewModel> PedidoItens { get; set; }
+        public IList<PedidoItemViewModel> PedidoBebidaItens { get; set; }
+        public IList<PedidoItemViewModel> PedidoComidaItens { get; set; }
 
         public PedidoViewModel()
         {
-            PedidoItens = new List<PedidoItemViewModel>();
+            PedidoBebidaItens = new List<PedidoItemViewModel>();
+            PedidoComidaItens = new List<PedidoItemViewModel>();
         }
     }
 }

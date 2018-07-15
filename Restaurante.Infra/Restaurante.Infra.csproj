@@ -62,9 +62,9 @@
     <Compile Include="Migrations\201807122116580_estruturaPedidos.Designer.cs">
       <DependentUpon>201807122116580_estruturaPedidos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807131932101_alteracaoPedidoItem.cs" />
-    <Compile Include="Migrations\201807131932101_alteracaoPedidoItem.Designer.cs">
-      <DependentUpon>201807131932101_alteracaoPedidoItem.cs</DependentUpon>
+    <Compile Include="Migrations\201807150114198_alteracaoPedidoItem.cs" />
+    <Compile Include="Migrations\201807150114198_alteracaoPedidoItem.Designer.cs">
+      <DependentUpon>201807150114198_alteracaoPedidoItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,8 +86,8 @@
     <EmbeddedResource Include="Migrations\201807122116580_estruturaPedidos.resx">
       <DependentUpon>201807122116580_estruturaPedidos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807131932101_alteracaoPedidoItem.resx">
-      <DependentUpon>201807131932101_alteracaoPedidoItem.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807150114198_alteracaoPedidoItem.resx">
+      <DependentUpon>201807150114198_alteracaoPedidoItem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

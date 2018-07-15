@@ -22,7 +22,6 @@ namespace Restaurante.Infra.Context
 
         public DateTime? DT_SERVED { get; set; }
 
-        [Required]
         [StringLength(200)]
         public string DS_DESCRIPTION { get; set; }
 

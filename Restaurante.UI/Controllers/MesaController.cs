@@ -18,17 +18,20 @@ namespace Restaurante.UI.Controllers
         readonly ICommandHandler<AbrirMesaCommand, AbrirMesaCommandResult> _abrirMesaComandHandler;
         readonly IQueryHandler<IEnumerable<MenuItemQueryResult>> _menuItemQueryHandler;
         readonly IQueryHandler<MesaAbertaQuery, MesaAbertaQueryResult> _mesaAbertaQueryHandler;
+        readonly ICommandHandler<PedidoCommand> _pedidoCommandHandler;
 
         public MesaController(
             IQueryHandler<IEnumerable<GarcomQueryResult>> garconsListHandler,
             ICommandHandler<AbrirMesaCommand, AbrirMesaCommandResult> abrirMesaComandHandler,
             IQueryHandler<IEnumerable<MenuItemQueryResult>> menuItemQueryHandler,
-            IQueryHandler<MesaAbertaQuery, MesaAbertaQueryResult> mesaAbertaQueryHandler)
+            IQueryHandler<MesaAbertaQuery, MesaAbertaQueryResult> mesaAbertaQueryHandler,
+            ICommandHandler<PedidoCommand> pedidoCommandHandler)
         {
             _garconsListHandler = garconsListHandler;
             _abrirMesaComandHandler = abrirMesaComandHandler;
             _menuItemQueryHandler = menuItemQueryHandler;
             _mesaAbertaQueryHandler = mesaAbertaQueryHandler;
+            _pedidoCommandHandler = pedidoCommandHandler;
         }
 
         // GET: Mesa
@@ -62,7 +65,7 @@ namespace Restaurante.UI.Controllers
             {
                 Id = result.Id
             };
-            return RedirectToAction("Pedido","Mesa",mesaAberta.Id);
+            return RedirectToAction("Pedido","Mesa",new { id = mesaAberta.Id });
         }
 
         public ActionResult Selecionar(int Id)
@@ -70,7 +73,7 @@ namespace Restaurante.UI.Controllers
             return View();
         }
 
-        public ActionResult Pedido()
+        public ActionResult Pedido(int id)
         {
             var menu = _menuItemQueryHandler.Handle().Select(o => new MenuItemViewModel
             {
@@ -82,7 +85,8 @@ namespace Restaurante.UI.Controllers
 
             var pedido = new PedidoViewModel
             {
-                PedidoItens = menu.Select(m => new PedidoItemViewModel {
+                MesaId = id,
+                PedidoBebidaItens = menu.Where(x => x.Bebida).Select(m => new PedidoItemViewModel {
                     MenuItem = new MenuItemViewModel
                     {
                         Id = m.Id,
@@ -91,11 +95,44 @@ namespace Restaurante.UI.Controllers
                         Bebida = m.Bebida,
                         Ativo = m.Ativo
                     }
-                })
+                }).ToList(),
+                PedidoComidaItens = menu.Where(x => !x.Bebida).Select(m => new PedidoItemViewModel
+                {
+                    MenuItem = new MenuItemViewModel
+                    {
+                        Id = m.Id,
+                        NumMenuItem = m.NumMenuItem,
+                        Descricao = m.Descricao,
+                        Bebida = m.Bebida,
+                        Ativo = m.Ativo
+                    }
+                }).ToList()
             };
 
             return View(pedido);
         }
+
+        [HttpPost]
+        public ActionResult Pedido(PedidoViewModel pedido)
+        {
+
+            _pedidoCommandHandler.Handle(new PedidoCommand(
+                pedido.MesaId, 
+                pedido.PedidoBebidaItens.Where(x => x.Quantidade > 0).Select( b => new PedidoItemCommand(
+                    b.MenuItem.Id,
+                    b.Descricao,
+                    b.Quantidade
+                    )).ToList(),
+                pedido.PedidoComidaItens.Where(x => x.Quantidade > 0).Select(b => new PedidoItemCommand(
+                   b.MenuItem.Id,
+                   b.Descricao,
+                   b.Quantidade
+                   )).ToList()
+                ));
+
+            return RedirectToAction("Status", new { id = pedido.MesaId });
+        }
+
         [HttpPost]
         public ActionResult Fechar()
         {
