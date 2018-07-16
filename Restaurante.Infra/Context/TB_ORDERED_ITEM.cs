@@ -14,6 +14,8 @@ namespace Restaurante.Infra.Context
 
         public int ID_ORDERED { get; set; }
 
+        public int NU_AMOUNT { get; set; }
+
         public decimal? NU_PRICE_ADJUSTIMENT { get; set; }
 
         public DateTime? DT_TO_SERVE { get; set; }

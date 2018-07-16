@@ -19,19 +19,22 @@ namespace Restaurante.UI.Controllers
         readonly IQueryHandler<IEnumerable<MenuItemQueryResult>> _menuItemQueryHandler;
         readonly IQueryHandler<MesaAbertaQuery, MesaAbertaQueryResult> _mesaAbertaQueryHandler;
         readonly ICommandHandler<PedidoCommand> _pedidoCommandHandler;
+        readonly ICommandHandler<MarcarComoServidoCommand> _marcarComoServidoCommandHandler;
 
         public MesaController(
             IQueryHandler<IEnumerable<GarcomQueryResult>> garconsListHandler,
             ICommandHandler<AbrirMesaCommand, AbrirMesaCommandResult> abrirMesaComandHandler,
             IQueryHandler<IEnumerable<MenuItemQueryResult>> menuItemQueryHandler,
             IQueryHandler<MesaAbertaQuery, MesaAbertaQueryResult> mesaAbertaQueryHandler,
-            ICommandHandler<PedidoCommand> pedidoCommandHandler)
+            ICommandHandler<PedidoCommand> pedidoCommandHandler,
+            ICommandHandler<MarcarComoServidoCommand> marcarComoServidoCommandHandler)
         {
             _garconsListHandler = garconsListHandler;
             _abrirMesaComandHandler = abrirMesaComandHandler;
             _menuItemQueryHandler = menuItemQueryHandler;
             _mesaAbertaQueryHandler = mesaAbertaQueryHandler;
             _pedidoCommandHandler = pedidoCommandHandler;
+            _marcarComoServidoCommandHandler = marcarComoServidoCommandHandler;
         }
 
         // GET: Mesa
@@ -121,12 +124,18 @@ namespace Restaurante.UI.Controllers
                 pedido.PedidoBebidaItens.Where(x => x.Quantidade > 0).Select( b => new PedidoItemCommand(
                     b.MenuItem.Id,
                     b.Descricao,
-                    b.Quantidade
+                    b.Quantidade,
+                    b.AServir,
+                    b.EmPreparacao,
+                    b.Servido
                     )).ToList(),
                 pedido.PedidoComidaItens.Where(x => x.Quantidade > 0).Select(b => new PedidoItemCommand(
                    b.MenuItem.Id,
                    b.Descricao,
-                   b.Quantidade
+                   b.Quantidade,
+                   b.AServir,
+                   b.EmPreparacao,
+                   b.Servido
                    )).ToList()
                 ));
 
@@ -137,6 +146,17 @@ namespace Restaurante.UI.Controllers
         public ActionResult Fechar()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult MarcarComoServido(MesaStatusViewModel mesaStatus)
+        {
+            foreach (var item in mesaStatus.PedidosAServir.Where(x => x.MarcarComoServido))
+            {
+                _marcarComoServidoCommandHandler.Handle(new MarcarComoServidoCommand(item.Id, item.Servido));
+            }
+
+            return RedirectToAction("Status", new { id = mesaStatus.MesaId});
         }
 
         public ActionResult Status(int id)
@@ -157,6 +177,7 @@ namespace Restaurante.UI.Controllers
                         Bebida = i.MenuItem.Bebida
                     },
                     Descricao = i.Descricao,
+                    Quantidade = i.Quantidade,
                     AServir = i.AServir,
                     EmPreparacao = i.EmPreparacao,
                     Servido = i.Servido
@@ -172,6 +193,7 @@ namespace Restaurante.UI.Controllers
                         Bebida = i.MenuItem.Bebida
                     },
                     Descricao = i.Descricao,
+                    Quantidade = i.Quantidade,
                     AServir = i.AServir,
                     EmPreparacao = i.EmPreparacao,
                     Servido = i.Servido
@@ -200,7 +222,7 @@ namespace Restaurante.UI.Controllers
 
             foreach (var pedido in pedidos)
             {
-                foreach (var item in pedido.PedidoBebidaItens)
+                foreach (var item in pedido.PedidoBebidaItens.Where(x => !x.Servido.HasValue))
                 {
                     pedidosAServir.Add(item);
                 }

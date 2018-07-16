@@ -18,6 +18,20 @@ namespace Restaurante.UI.ViewModel
         public DateTime? EmPreparacao { get; set; }
         public DateTime? Servido { get; set; }
 
+        public bool MarcarComoServido {
+            get
+            {
+                return (Servido.HasValue)? true : false;
+            }
+            set
+            {
+                if (value)
+                {
+                    Servido = DateTime.Now;
+                }
+            }
+        }
+
         [Display(Name = "Menu")]
         public IEnumerable<MenuItemViewModel> MenuItens { get; set; }
 

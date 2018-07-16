@@ -3,7 +3,7 @@ namespace Restaurante.Infra.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class alteracaoPedidoItem : DbMigration
+    public partial class addFieldAmountOrderedItem : DbMigration
     {
         public override void Up()
         {
@@ -12,7 +12,7 @@ namespace Restaurante.Infra.Migrations
         
         public override void Down()
         {
-            
+
         }
     }
 }

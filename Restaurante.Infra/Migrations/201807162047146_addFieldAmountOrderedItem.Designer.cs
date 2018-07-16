@@ -7,13 +7,13 @@ namespace Restaurante.Infra.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class alteracaoPedidoItem : IMigrationMetadata
+    public sealed partial class addFieldAmountOrderedItem : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(alteracaoPedidoItem));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addFieldAmountOrderedItem));
         
         string IMigrationMetadata.Id
         {
-            get { return "201807150114198_alteracaoPedidoItem"; }
+            get { return "201807162047146_addFieldAmountOrderedItem"; }
         }
         
         string IMigrationMetadata.Source

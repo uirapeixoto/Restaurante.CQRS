@@ -24,7 +24,8 @@ namespace Restaurante.Command.Mesas.Handler
             var listaPedidosComida = c.PedidosComidaItens.Select(x => new TB_ORDERED_ITEM
             {
                   DS_DESCRIPTION = x.Descricao,
-                  DT_TO_SERVE = DateTime.Now,
+                  NU_AMOUNT = x.Quantidade,
+                  DT_TO_SERVE = x.AServir,
                   DT_IN_PREPARATION = DateTime.Now,
                   ID_MENU_ITEM = x.MenuId,
                   DT_SERVICE = x.DataServico
@@ -33,6 +34,7 @@ namespace Restaurante.Command.Mesas.Handler
             var listaPedidosBebida = c.PedidosBebidaItens.Select(x => new TB_ORDERED_ITEM
             {
                 DS_DESCRIPTION = x.Descricao,
+                NU_AMOUNT = x.Quantidade,
                 DT_TO_SERVE = DateTime.Now,
                 ID_MENU_ITEM = x.MenuId,
                 DT_SERVICE = x.DataServico

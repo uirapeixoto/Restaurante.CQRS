@@ -2,7 +2,7 @@ namespace Restaurante.Infra.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class estruturaPedidos : DbMigration
     {
         public override void Up()
@@ -10,103 +10,104 @@ namespace Restaurante.Infra.Migrations
             CreateTable(
                 "dbo.TB_MENU_ITEM",
                 c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        NU_MENU_ITEM = c.Int(nullable: false),
-                        DS_DESCRIPTION = c.String(nullable: false, maxLength: 200, unicode: false),
-                        NU_PRICE = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        ST_IS_DRINK = c.Boolean(nullable: false),
-                        ST_ACTIVE = c.Boolean(nullable: false),
-                        DT_CREATED = c.DateTime(nullable: false),
-                        DT_UPDATED = c.DateTime(),
-                    })
+                {
+                    ID = c.Int(nullable: false, identity: true),
+                    NU_MENU_ITEM = c.Int(nullable: false),
+                    DS_DESCRIPTION = c.String(nullable: false, maxLength: 200, unicode: false),
+                    NU_PRICE = c.Decimal(nullable: false, precision: 18, scale: 2),
+                    ST_IS_DRINK = c.Boolean(nullable: false),
+                    ST_ACTIVE = c.Boolean(nullable: false),
+                    DT_CREATED = c.DateTime(nullable: false),
+                    DT_UPDATED = c.DateTime(),
+                })
                 .PrimaryKey(t => t.ID);
-            
+
             CreateTable(
                 "dbo.TB_ORDERED_ITEM",
                 c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        ID_MENU_ITEM = c.Int(nullable: false),
-                        ID_ORDERED = c.Int(nullable: false),
-                        NU_PRICE_ADJUSTIMENT = c.Decimal(precision: 18, scale: 2),
-                        DT_TO_SERVE = c.DateTime(),
-                        DT_IN_PREPARATION = c.DateTime(),
-                        DT_SERVED = c.DateTime(),
-                        DS_DESCRIPTION = c.String(maxLength: 200, unicode: false),
-                        DT_SERVICE = c.DateTime(nullable: false),
-                    })
+                {
+                    ID = c.Int(nullable: false, identity: true),
+                    ID_MENU_ITEM = c.Int(nullable: false),
+                    ID_ORDERED = c.Int(nullable: false),
+                    NU_AMOUNT = c.Int(nullable: false),
+                    NU_PRICE_ADJUSTIMENT = c.Decimal(precision: 18, scale: 2),
+                    DT_TO_SERVE = c.DateTime(),
+                    DT_IN_PREPARATION = c.DateTime(),
+                    DT_SERVED = c.DateTime(),
+                    DS_DESCRIPTION = c.String(maxLength: 200, unicode: false),
+                    DT_SERVICE = c.DateTime(nullable: false),
+                })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.TB_ORDERED", t => t.ID_ORDERED)
                 .ForeignKey("dbo.TB_MENU_ITEM", t => t.ID_MENU_ITEM)
                 .Index(t => t.ID_MENU_ITEM)
                 .Index(t => t.ID_ORDERED);
-            
+
             CreateTable(
                 "dbo.TB_ORDERED",
                 c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        ID_TAB_OPENED = c.Int(nullable: false),
-                        DT_SERVICE = c.DateTime(),
-                    })
+                {
+                    ID = c.Int(nullable: false, identity: true),
+                    ID_TAB_OPENED = c.Int(nullable: false),
+                    DT_SERVICE = c.DateTime(),
+                })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.TB_TAB_OPENED", t => t.ID_TAB_OPENED)
                 .Index(t => t.ID_TAB_OPENED);
-            
+
             CreateTable(
                 "dbo.TB_TAB_OPENED",
                 c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        NU_TABLE = c.Int(),
-                        ID_WAITER = c.Int(),
-                        ST_ACTIVE = c.Boolean(nullable: false),
-                        DT_SERVICE = c.DateTime(),
-                        ST_UNIQUE_IDENTIFIER = c.Guid(),
-                    })
+                {
+                    ID = c.Int(nullable: false, identity: true),
+                    NU_TABLE = c.Int(),
+                    ID_WAITER = c.Int(),
+                    ST_ACTIVE = c.Boolean(nullable: false),
+                    DT_SERVICE = c.DateTime(),
+                    ST_UNIQUE_IDENTIFIER = c.Guid(),
+                })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.TB_WAITSTAFF", t => t.ID_WAITER)
                 .Index(t => t.ID_WAITER);
-            
+
             CreateTable(
                 "dbo.TB_TODO",
                 c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        ID_TAB_OPENED = c.Int(nullable: false),
-                        ID_ORDERED = c.Int(nullable: false),
-                        DT_SERVICE = c.DateTime(),
-                    })
+                {
+                    ID = c.Int(nullable: false, identity: true),
+                    ID_TAB_OPENED = c.Int(nullable: false),
+                    ID_ORDERED = c.Int(nullable: false),
+                    DT_SERVICE = c.DateTime(),
+                })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.TB_TAB_OPENED", t => t.ID_TAB_OPENED)
                 .Index(t => t.ID_TAB_OPENED);
-            
+
             CreateTable(
                 "dbo.TB_WAITSTAFF",
                 c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        DS_NAME = c.String(nullable: false, maxLength: 200, unicode: false),
-                        DT_CREATED = c.DateTime(nullable: false),
-                        DT_UPDATED = c.DateTime(),
-                    })
+                {
+                    ID = c.Int(nullable: false, identity: true),
+                    DS_NAME = c.String(nullable: false, maxLength: 200, unicode: false),
+                    DT_CREATED = c.DateTime(nullable: false),
+                    DT_UPDATED = c.DateTime(),
+                })
                 .PrimaryKey(t => t.ID);
-            
+
             CreateTable(
                 "dbo.TB_TAB_CLOSED",
                 c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        NU_AMOUNT_PAID = c.Decimal(precision: 18, scale: 2),
-                        NU_ORDER_VALUE = c.Decimal(precision: 18, scale: 2),
-                        NU_TIP_VALUE = c.Decimal(precision: 18, scale: 2),
-                        DT_SERVICE = c.DateTime(),
-                    })
+                {
+                    ID = c.Int(nullable: false, identity: true),
+                    NU_AMOUNT_PAID = c.Decimal(precision: 18, scale: 2),
+                    NU_ORDER_VALUE = c.Decimal(precision: 18, scale: 2),
+                    NU_TIP_VALUE = c.Decimal(precision: 18, scale: 2),
+                    DT_SERVICE = c.DateTime(),
+                })
                 .PrimaryKey(t => t.ID);
-            
+
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.TB_ORDERED_ITEM", "ID_MENU_ITEM", "dbo.TB_MENU_ITEM");

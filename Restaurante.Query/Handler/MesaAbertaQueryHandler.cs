@@ -34,6 +34,7 @@ namespace Restaurante.Query.Handler
                                 i.TB_MENU_ITEM.DS_DESCRIPTION, 
                                 i.TB_MENU_ITEM.ST_IS_DRINK,
                                 i.TB_MENU_ITEM.ST_ACTIVE),
+                            i.NU_AMOUNT,
                             i.DT_TO_SERVE,
                             i.DT_IN_PREPARATION,
                             i.DT_SERVED

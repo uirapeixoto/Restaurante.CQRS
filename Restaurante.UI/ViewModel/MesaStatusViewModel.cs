@@ -6,9 +6,9 @@ namespace Restaurante.UI.ViewModel
     {
         public int MesaId { get; set; }
         public int NumMesa { get; set; }
-        public IEnumerable<PedidoItemViewModel> PedidosAServir { get; set; }
-        public IEnumerable<PedidoItemViewModel> PedidosEmPreparacao { get; set; }
-        public IEnumerable<PedidoItemViewModel> PedidosServidos { get; set; }
+        public IList<PedidoItemViewModel> PedidosAServir { get; set; }
+        public IList<PedidoItemViewModel> PedidosEmPreparacao { get; set; }
+        public IList<PedidoItemViewModel> PedidosServidos { get; set; }
 
         public MesaStatusViewModel()
         {
