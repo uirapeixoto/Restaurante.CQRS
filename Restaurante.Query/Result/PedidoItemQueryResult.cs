@@ -12,15 +12,13 @@ namespace Restaurante.Query.Result
         public DateTime? EmPreparacao { get; }
         public DateTime? Servido { get; }
         public MenuItemQueryResult MenuItem { get; }
-        public DateTime? AService { get; }
-        public DateTime? EmPreaparacao { get; }
 
-        public PedidoItemQueryResult(int id, MenuItemQueryResult menuItem, DateTime? aService, DateTime? emPreaparacao, DateTime? servido, decimal ajustePreco = (decimal) 0.0, string descricao = "" )
+        public PedidoItemQueryResult(int id, MenuItemQueryResult menuItem, DateTime? aServir, DateTime? emPreparacao, DateTime? servido, decimal ajustePreco = (decimal) 0.0, string descricao = "" )
         {
             Id = id;
             MenuItem = menuItem;
-            AService = aService;
-            EmPreaparacao = emPreaparacao;
+            AServir = aServir;
+            EmPreparacao = emPreparacao;
             Servido = servido;
             AjustePreco = ajustePreco;
             Descricao = descricao;
