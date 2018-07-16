@@ -34,7 +34,7 @@
                 {
                     <tr>
                         <td>@Model.NumMesa</td>
-                        <td>@item.Descricao</td>
+                        <td>@item.MenuItem.Descricao</td>
                         <td>@item.Descricao</td>
                         <td>@Html.CheckBox(string.Format("served_{0}_{1}", i++, item.Id.ToString()))</td>
                     </tr>
@@ -61,7 +61,7 @@
             {
                 <tr>
                     <td>@item.MenuItem.NumMenuItem</td>
-                    <td>@item.Descricao</td>
+                    <td>@item.MenuItem.Descricao</td>
                 </tr>
             }
         </tbody>
@@ -83,7 +83,7 @@
             {
                 <tr>
                     <td>@item.MenuItem.NumMenuItem</td>
-                    <td>@item.Descricao</td>
+                    <td>@item.MenuItem.Descricao</td>
                 </tr>
             }
         </tbody>

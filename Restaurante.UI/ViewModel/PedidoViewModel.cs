@@ -8,6 +8,7 @@ namespace Restaurante.UI.ViewModel
     {
         public int Id { get; set; }
         public int MesaId { get; set; }
+        public int NumMesa { get; set; }
         public PedidoItemViewModel PedidoItem { get; set; }
         public IList<PedidoItemViewModel> PedidoBebidaItens { get; set; }
         public IList<PedidoItemViewModel> PedidoComidaItens { get; set; }

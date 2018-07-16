@@ -141,22 +141,99 @@ namespace Restaurante.UI.Controllers
 
         public ActionResult Status(int id)
         {
-            var mesa = _mesaAbertaQueryHandler.Handle(new MesaAbertaQuery(id));
+            var mesa = _mesaAbertaQueryHandler.Handle(new MesaAbertaQuery(id,0));
             var pedidos = mesa.Pedidos.Select(x => new PedidoViewModel
             {
                 Id = x.Id,
-                PedidoItem = null
-            });
+                NumMesa = mesa.NumMesa,
+                PedidoBebidaItens = x.ItensPedidos.Where(b => b.MenuItem.Bebida).Select( i => new PedidoItemViewModel
+                {
+                    Id = i.Id,
+                    MenuItem = new MenuItemViewModel
+                    {
+                        Id = i.MenuItem.Id,
+                        NumMenuItem = i.MenuItem.NumMenuItem,
+                        Descricao = i.MenuItem.Descricao,
+                        Bebida = i.MenuItem.Bebida
+                    },
+                    Descricao = i.Descricao,
+                    AServir = i.AServir,
+                    EmPreparacao = i.EmPreparacao,
+                    Servido = i.Servido
+                }).ToList(),
+                PedidoComidaItens = x.ItensPedidos.Where(b => !b.MenuItem.Bebida).Select(i => new PedidoItemViewModel
+                {
+                    Id = i.Id,
+                    MenuItem = new MenuItemViewModel
+                    {
+                        Id = i.MenuItem.Id,
+                        NumMenuItem = i.MenuItem.NumMenuItem,
+                        Descricao = i.MenuItem.Descricao,
+                        Bebida = i.MenuItem.Bebida
+                    },
+                    Descricao = i.Descricao,
+                    AServir = i.AServir,
+                    EmPreparacao = i.EmPreparacao,
+                    Servido = i.Servido
+                }).ToList()
+            }).ToList();
 
+            var pedidosItensAgregados = AgregarPedidos(pedidos);
             var mesaStatus = new MesaStatusViewModel
             {
                MesaId = mesa.Id,
-               NumMesa = mesa.NumMesa
+               NumMesa = mesa.NumMesa,
+               PedidosAServir = pedidosItensAgregados.PedidosAServir,
+               PedidosEmPreparacao = pedidosItensAgregados.PedidosEmPreparacao,
+               PedidosServidos = pedidosItensAgregados.PedidosServidos
             };
-
-            
             
             return View(mesaStatus);
+        }
+
+        protected MesaStatusViewModel AgregarPedidos(IList<PedidoViewModel> pedidos)
+        {
+            var pedidosAServir = new  List<PedidoItemViewModel>();
+            var pedidosComidaEmPreparacao = new List<PedidoItemViewModel>();
+            var pedidosServidos = new List<PedidoItemViewModel>();
+            
+
+            foreach (var pedido in pedidos)
+            {
+                foreach (var item in pedido.PedidoBebidaItens)
+                {
+                    pedidosAServir.Add(item);
+                }
+            }
+
+            foreach (var pedido in pedidos)
+            {
+                foreach (var item in pedido.PedidoComidaItens.Where(x => x.EmPreparacao.HasValue && !x.MenuItem.Bebida))
+                {
+                    pedidosComidaEmPreparacao.Add(item);
+                }
+            }
+
+            foreach (var pedido in pedidos)
+            {
+                foreach (var item in pedido.PedidoBebidaItens.Where(x => x.Servido.HasValue))
+                {
+                    pedidosServidos.Add(item);
+                }
+                foreach (var item in pedido.PedidoComidaItens.Where(x => x.Servido.HasValue))
+                {
+                    pedidosServidos.Add(item);
+                }
+            }
+
+            var pedidosItensConsolidados = new MesaStatusViewModel
+            {
+                PedidosAServir = pedidosAServir,
+                PedidosEmPreparacao = pedidosComidaEmPreparacao,
+                PedidosServidos = pedidosServidos
+            };
+
+            return pedidosItensConsolidados;
         }
     }
 }

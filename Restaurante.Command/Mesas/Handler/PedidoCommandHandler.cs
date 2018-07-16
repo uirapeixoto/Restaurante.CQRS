@@ -21,10 +21,11 @@ namespace Restaurante.Command.Mesas.Handler
         public void Handle(PedidoCommand c)
         {
 
-            var listaPedidosComida = c.PedidosBebidaItens.Select(x => new TB_ORDERED_ITEM
+            var listaPedidosComida = c.PedidosComidaItens.Select(x => new TB_ORDERED_ITEM
             {
                   DS_DESCRIPTION = x.Descricao,
                   DT_TO_SERVE = DateTime.Now,
+                  DT_IN_PREPARATION = DateTime.Now,
                   ID_MENU_ITEM = x.MenuId,
                   DT_SERVICE = x.DataServico
             });

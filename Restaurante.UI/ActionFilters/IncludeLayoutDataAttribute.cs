@@ -45,11 +45,13 @@ namespace Restaurante.UI.ActionFilters
                 {
                     list.Add(item.Nome);
                 }
-                var mesas = _mesasAbertas.Handle().Select(o => o.Id);
-                var listaMesas = new List<int>();
+
+                var mesas = _mesasAbertas.Handle();
+                var listaMesas = new Dictionary<int, int>();
+
                 foreach (var item in mesas)
                 {
-                    listaMesas.Add(item);
+                    listaMesas.Add(item.Id, item.NumMesa);
                 }
 
                 bag.Garcons = garcons;
