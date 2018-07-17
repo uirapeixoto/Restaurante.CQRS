@@ -229,6 +229,7 @@
     <Content Include="Views\Garcom\Tarefa.cshtml" />
     <Content Include="Views\Mesa\Status.cshtml" />
     <Content Include="Views\Mesa\Pedido.cshtml" />
+    <Content Include="Views\Shared\_PainelTarefa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

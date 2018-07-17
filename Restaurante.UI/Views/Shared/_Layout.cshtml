@@ -30,35 +30,17 @@
 
     <div class="container body-content">
         <div class="col-lg-4">
-            <div class="well sidebar-nav">
-                <ul class="nav nav-list">
-                    <li class="nav-header">Tarefas dos Garçons</li>
-                    @{
-                        var garcons = ViewBag.GarconsStr as List<string>;
-                     }
-                    @foreach (var g in garcons.OrderBy(s => s))
-                    {
-                        <li>@Html.ActionLink(g, "Tarefa", "Garcom", new { id = g }, null)</li>
-                    }
-                    <li class="nav-header">Open Tabs</li>
-                    @{ 
-                        var linkMesas = ViewBag.ActiveTables as Dictionary<int, int>;
-                    }
-                    @foreach (KeyValuePair<int, int> item in linkMesas.OrderBy(k => k.Key))
-                    {
-                        <li>@Html.ActionLink(item.Value.ToString(), "Status", "Mesa", new { id = item.Key.ToString() }, null)</li>
-                    }
-                </ul>
-            </div><!--/.well -->
+            @Html.Partial("_PainelTarefa")
         </div>
         <div class="col-lg-8">
             @RenderBody()
         </div>
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Restaurant Application</p>
         </footer>
     </div>
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

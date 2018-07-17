@@ -1,0 +1,20 @@
+﻿<div class="well sidebar-nav">
+    <ul class="nav nav-list">
+        <li class="nav-header">Tarefas dos Garçons</li>
+        @{
+            var garcons = ViewBag.GarconsStr as List<string>;
+        }
+        @foreach (var g in garcons.OrderBy(s => s))
+        {
+            <li>@Html.ActionLink(g, "Tarefa", "Garcom", new { id = g }, null)</li>
+        }
+        <li class="nav-header">Mesas Abertas</li>
+        @{
+            var linkMesas = ViewBag.ActiveTables as Dictionary<int, int>;
+        }
+        @foreach (KeyValuePair<int, int> item in linkMesas.OrderBy(k => k.Key))
+        {
+            @Html.ActionLink(item.Value.ToString(), "Status", "Mesa", new { id = item.Key.ToString() }, new { @class= "btn btn-lg btn-default active" })
+        }
+    </ul>
+</div><!--/.well -->

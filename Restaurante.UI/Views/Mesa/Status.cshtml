@@ -29,6 +29,7 @@
                     <th>Menu #</th>
                     <th>Descrição</th>
                     <th class="text-center">Quantidade</th>
+                    <th class="text-center">Quando</th>
                     <th class="text-center"><i class=" glyphicon glyphicon-check"></i> Marcar como servido</th>
                 </tr>
             </thead>
@@ -39,6 +40,7 @@
                         <td>@Html.DisplayFor(m => m.PedidosAServir[i].MenuItem.NumMenuItem)</td>
                         <td>@Html.DisplayFor(m => m.PedidosAServir[i].MenuItem.Descricao)</td>
                         <td class="text-center">@Html.DisplayFor(m => m.PedidosAServir[i].Quantidade)</td>
+                        <td class="text-center">@Html.DisplayFor(m => m.PedidosAServir[i].AServir)</td>
                         <td class="text-center">
                             @Html.CheckBoxFor(m => m.PedidosAServir[i].MarcarComoServido, new { @class = "checkbox " })
                             @Html.HiddenFor(m => m.PedidosAServir[i].Id)
@@ -50,39 +52,35 @@
 
         <button type="submit" class="btn btn-default ">Marcar Como Servido</button>
     }
+}
 
-
-    if (Model.PedidosEmPreparacao.Any())
-    {
-        <h3>Itens em preparação</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Menu #</th>
-                    <th>Descriçao</th>
-                    <th class="text-center">Quantidade</th>
-                    <th class="text-center"><i class=" glyphicon glyphicon-check"></i> Marcar como servido</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (int i = 0; i < Model.PedidosEmPreparacao.Count(); i++)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(m => m.PedidosEmPreparacao[i].MenuItem.NumMenuItem)</td>
-                        <td>@Html.DisplayFor(m => m.PedidosEmPreparacao[i].MenuItem.Descricao)</td>
-                        <td class="text-center">@Html.DisplayFor(m => m.PedidosEmPreparacao[i].Quantidade)</td>
-                        <td class="text-center">
-                            @Html.CheckBoxFor(m => m.PedidosEmPreparacao[i].MarcarComoServido, new { @class = "checkbox " })
-                            @Html.HiddenFor(m => m.PedidosEmPreparacao[i].Id)
-                        </td>
-                    </tr>
-
-                }
-
-            </tbody>
-        </table>
-        <button type="submit" class="btn btn-default ">Marcar Como Servido</button>
-    }
+@if (Model.PedidosEmPreparacao.Any())
+{
+    <h3>Itens em preparação</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Menu #</th>
+                <th>Descriçao</th>
+                <th class="text-center">Quando</th>
+                <th class="text-center">Quantidade</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.PedidosEmPreparacao.Count(); i++)
+            {
+            <tr>
+                <td>@Html.DisplayFor(m => m.PedidosEmPreparacao[i].MenuItem.NumMenuItem)</td>
+                <td>@Html.DisplayFor(m => m.PedidosEmPreparacao[i].MenuItem.Descricao)</td>
+                <td class="text-center">@Html.DisplayFor(m => m.PedidosEmPreparacao[i].EmPreparacao)</td>
+                <td class="text-center">
+                    @Html.DisplayFor(m => m.PedidosEmPreparacao[i].Quantidade)
+                    @Html.HiddenFor(m => m.PedidosEmPreparacao[i].Id)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
 }
 @if (Model.PedidosServidos.Any())
 {
@@ -92,19 +90,19 @@
             <tr>
                 <th>Menu #</th>
                 <th>Description</th>
-                <th class="text-center">Quantidade</th>
                 <th class="text-center">Quando</th>
+                <th class="text-center">Quantidade</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.PedidosServidos)
             {
-            <tr>
-                <td>@item.MenuItem.NumMenuItem</td>
-                <td>@item.MenuItem.Descricao</td>
-                <td class="text-center">@item.Quantidade</td>
-                <td class="text-center">@item.Servido</td>
-            </tr>
+                <tr>
+                    <td>@item.MenuItem.NumMenuItem</td>
+                    <td>@item.MenuItem.Descricao</td>
+                    <td class="text-center">@item.Servido</td>
+                    <td class="text-center">@item.Quantidade</td>
+                </tr>
             }
         </tbody>
     </table>

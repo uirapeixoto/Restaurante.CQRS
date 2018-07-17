@@ -209,7 +209,6 @@ namespace Restaurante.UI.Controllers
                PedidosEmPreparacao = pedidosItensAgregados.PedidosEmPreparacao,
                PedidosServidos = pedidosItensAgregados.PedidosServidos
             };
-            
             return View(mesaStatus);
         }
 

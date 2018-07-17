@@ -18,13 +18,20 @@ namespace Restaurante.Query.Handler
 
         public IEnumerable<MenuItemQueryResult> Handle()
         {
-            return _context.TB_MENU_ITEM.AsNoTracking().Where(x => x.ST_ACTIVE).AsParallel().Select(x => new MenuItemQueryResult(
+            try
+            {
+                return _context.TB_MENU_ITEM.AsNoTracking().Where(x => x.ST_ACTIVE).AsParallel().Select(x => new MenuItemQueryResult(
                     x.ID,
                     x.NU_MENU_ITEM,
                     x.DS_DESCRIPTION,
                     x.ST_IS_DRINK,
                     x.ST_ACTIVE
                 )).ToList();
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

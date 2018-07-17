@@ -15,10 +15,11 @@ namespace Restaurante.Query.Handler
         {
             _context = context;
         }
-
         public IEnumerable<MesaAbertaQueryResult> Handle()
         {
-            var result = _context.TB_TAB_OPENED
+            try
+            {
+                var result = _context.TB_TAB_OPENED
                 .Include(p => p.TB_ORDERED)
                 .Include(g => g.TB_WAITSTAFF)
                 .AsNoTracking()
@@ -33,7 +34,12 @@ namespace Restaurante.Query.Handler
                     o.ST_ACTIVE
                     )).ToList();
 
-            return result;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
