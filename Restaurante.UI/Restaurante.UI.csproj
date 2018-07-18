@@ -17,7 +17,7 @@
     <AssemblyName>Restaurante.UI</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -178,6 +178,7 @@
     <Compile Include="Helper\EnumerableHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\CozinhaTarefaLista.cs" />
+    <Compile Include="ViewModel\CozinhaTarefasViewModel.cs" />
     <Compile Include="ViewModel\GarcomViewModel.cs" />
     <Compile Include="ViewModel\MenuItemViewModel.cs" />
     <Compile Include="ViewModel\MesaAbertaViewModel.cs" />
@@ -230,11 +231,11 @@
     <Content Include="Views\Mesa\Status.cshtml" />
     <Content Include="Views\Mesa\Pedido.cshtml" />
     <Content Include="Views\Shared\_PainelTarefa.cshtml" />
+    <Content Include="Views\Cozinha\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Cozinha\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -293,7 +294,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>30037</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:30037/</IISUrl>
+          <IISUrl>http://localhost/Restaurante</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

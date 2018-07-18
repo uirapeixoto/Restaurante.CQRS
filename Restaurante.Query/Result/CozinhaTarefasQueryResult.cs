@@ -5,24 +5,35 @@ namespace Restaurante.Query.Result
 {
     public class CozinhaTarefasQueryResult : IQueryResult
     {
-        public int Id { get; }
+        public int MesaId { get; }
+        public int NumMesa { get; }
+        public int PedidoId { get; }
         public string Descricao { get; }
-        public int Quantidade { get; }
-        public decimal AjustePreco { get; }
         public DateTime? AServir { get; }
         public DateTime? EmPreparacao { get; }
         public DateTime? Servido { get; }
         public MenuItemQueryResult MenuItem { get; }
+        public int Quantidade { get; }
 
-        public CozinhaTarefasQueryResult(int id, MenuItemQueryResult menuItem, int quantidade, DateTime? aServir, DateTime? emPreparacao, DateTime? servido, decimal ajustePreco = (decimal)0.0, string descricao = "")
+        public CozinhaTarefasQueryResult(
+        int mesaId,
+        int numMesa,
+        int pedidoId,
+        MenuItemQueryResult menuItem,
+         int quantidade,
+         DateTime? aServir,
+         DateTime? emPreparacao,
+         DateTime? servido,
+         string descricao)
         {
-            Id = id;
+            MesaId = mesaId;
+            NumMesa = numMesa;
+            PedidoId = pedidoId;
             MenuItem = menuItem;
             Quantidade = quantidade;
             AServir = aServir;
             EmPreparacao = emPreparacao;
             Servido = servido;
-            AjustePreco = ajustePreco;
             Descricao = descricao;
         }
 
