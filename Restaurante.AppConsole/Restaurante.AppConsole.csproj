@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4B3531D9-233A-44A9-A762-C01765796FCB}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Restaurante.Query</RootNamespace>
-    <AssemblyName>Restaurante.Query</AssemblyName>
+    <ProjectGuid>{DC87F98E-807E-4E7F-986D-EBA1725DE3DA}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Restaurante.AppConsole</RootNamespace>
+    <AssemblyName>Restaurante.AppConsole</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -47,52 +49,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Handler\CozinhaTarefasQueryHandler.cs" />
-    <Compile Include="Handler\GarcomListQueryHandler.cs" />
-    <Compile Include="Handler\GarconsTarefasQueryHandler.cs" />
-    <Compile Include="Handler\IncludeLayoutDataAttribute.cs" />
-    <Compile Include="Handler\MenuListQueryHandler.cs" />
-    <Compile Include="Handler\MesaAbertaListQueryHandler.cs" />
-    <Compile Include="Handler\MesaAbertaQueryHandler.cs" />
-    <Compile Include="Handler\PedidosStatusQueryHandler.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Query\CozinhaTarefasQuery.cs" />
-    <Compile Include="Query\GarcomQuery.cs" />
-    <Compile Include="Query\GarconsTarefasQuery.cs" />
-    <Compile Include="Query\MenuItemQuery.cs" />
-    <Compile Include="Query\MesaAbertaQuery.cs" />
-    <Compile Include="Query\PedidoItemQuery.cs" />
-    <Compile Include="Query\PedidoQuery.cs" />
-    <Compile Include="Query\PedidosStatusQuery.cs" />
-    <Compile Include="Query\TarefaQuery.cs" />
-    <Compile Include="Result\CozinhaTarefasQueryResult.cs" />
-    <Compile Include="Result\GarcomQueryResult.cs" />
-    <Compile Include="Result\GarconsTarefasQueryResult.cs" />
-    <Compile Include="Result\MenuItemQueryResult.cs" />
-    <Compile Include="Result\MesaAbertaQueryResult.cs" />
-    <Compile Include="Result\PedidosStatusQueryResult.cs" />
-    <Compile Include="Result\PedidoStatusQueryRestul.cs" />
-    <Compile Include="Result\PedidoItemQueryResult.cs" />
-    <Compile Include="Result\PedidoQueryResult.cs" />
-    <Compile Include="Result\TarefaQueryResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Restaurante.Contract\Restaurante.Contract.csproj">
-      <Project>{d62a4424-6d28-49ad-b2e5-ad1499fc2c76}</Project>
-      <Name>Restaurante.Contract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Restaurante.Dominio\Restaurante.Dominio.csproj">
-      <Project>{CFCDCAB1-E341-4C3D-A9FF-0C6B42F7AE5F}</Project>
-      <Name>Restaurante.Dominio</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Restaurante.Infra\Restaurante.Infra.csproj">
       <Project>{6BA0BDF3-E23D-4593-8D53-FCFAE5B82B79}</Project>
       <Name>Restaurante.Infra</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Restaurante.Query\Restaurante.Query.csproj">
+      <Project>{4B3531D9-233A-44A9-A762-C01765796FCB}</Project>
+      <Name>Restaurante.Query</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

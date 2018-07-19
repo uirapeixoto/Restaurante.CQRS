@@ -3,15 +3,14 @@ using Restaurante.Query.Query;
 using Restaurante.Query.Result;
 using Restaurante.UI.ActionFilters;
 using Restaurante.UI.ViewModel;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Restaurante.UI.Controllers
 {
-    public class CozinhaController : Controller
+    [IncludeLayoutData]
+    public class CozinhaController : BaseController
     {
         readonly IQueryHandler<CozinhaTarefasQuery, IEnumerable<CozinhaTarefasQueryResult>> _cozinhaTarefasQueryHandler;
         public CozinhaController(IQueryHandler<CozinhaTarefasQuery, IEnumerable<CozinhaTarefasQueryResult>> cozinhaTarefasQueryHandler)
@@ -22,7 +21,6 @@ namespace Restaurante.UI.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        [IncludeLayoutData]
         public ActionResult Index()
         {
             var result = _cozinhaTarefasQueryHandler.Handle(new CozinhaTarefasQuery(0))
