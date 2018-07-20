@@ -6,7 +6,6 @@ namespace Restaurante.Query.Result
     public class CozinhaTarefasQueryResult : IQueryResult
     {
         public int MesaId { get; }
-        public int NumMesa { get; }
         public int PedidoId { get; }
         public string Descricao { get; }
         public DateTime? AServir { get; }
@@ -17,7 +16,6 @@ namespace Restaurante.Query.Result
 
         public CozinhaTarefasQueryResult(
         int mesaId,
-        int numMesa,
         int pedidoId,
         MenuItemQueryResult menuItem,
          int quantidade,
@@ -27,7 +25,6 @@ namespace Restaurante.Query.Result
          string descricao)
         {
             MesaId = mesaId;
-            NumMesa = numMesa;
             PedidoId = pedidoId;
             MenuItem = menuItem;
             Quantidade = quantidade;

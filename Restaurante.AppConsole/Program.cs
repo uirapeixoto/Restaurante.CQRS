@@ -1,11 +1,8 @@
 ﻿using Restaurante.Infra.Context;
 using Restaurante.Query.Result;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Restaurante.AppConsole
 {
@@ -15,42 +12,46 @@ namespace Restaurante.AppConsole
         {
             using (var _context = new CafeContext())
             {
-                var result = _context.TB_TAB_OPENED
+                var result = _context.TB_ORDERED_ITEM
                  .AsNoTracking()
-                 .Where(e => e.ST_ACTIVE)
-                 .Where(g => g.ID_WAITER == 1)
-                 .Include(p => p.TB_ORDERED)
-                 .Include(p => p.TB_WAITSTAFF)
+                 .Include(i => i.TB_MENU_ITEM)
+                 .Include(i => i.TB_ORDERED)
+                 .Include(i => i.TB_ORDERED.TB_TAB_OPENED)
+                 .Where(x => !x.TB_MENU_ITEM.ST_IS_DRINK)
+                 .Where(x => !x.DT_SERVED.HasValue)
+                 .Where(x => x.DT_IN_PREPARATION.HasValue)
                  .AsParallel()
-                 .Select(o => new MesaAbertaQueryResult(
-                         o.ID,
-                         o.NU_TABLE.Value,
-                         new GarcomQueryResult(o.TB_WAITSTAFF.ID, o.TB_WAITSTAFF.DS_NAME),
-                         o.TB_ORDERED.Where(x => x.TB_ORDERED_ITEM.Any()).Select(
-                             p => new PedidoQueryResult(
-                             p.ID,
-                             p.TB_ORDERED_ITEM
-                             .Where(x => !x.DT_SERVED.HasValue)
-                             .Select(i => new PedidoItemQueryResult(
-                                     i.ID,
-                                     new MenuItemQueryResult(
-                                         i.TB_MENU_ITEM.ID,
-                                         i.TB_MENU_ITEM.NU_MENU_ITEM,
-                                         i.TB_MENU_ITEM.DS_DESCRIPTION,
-                                         i.TB_MENU_ITEM.ST_IS_DRINK,
-                                         i.TB_MENU_ITEM.ST_ACTIVE
-                                     ),
-                                     i.NU_AMOUNT,
-                                     i.DT_TO_SERVE,
-                                     i.DT_IN_PREPARATION,
-                                     i.DT_SERVED,
-                                     i.DS_DESCRIPTION
-                             ))
-                         )),
-                         o.DT_SERVICE,
-                         o.ST_ACTIVE
+                 .Select(o => new CozinhaTarefasQueryResult(
+                        o.TB_ORDERED.TB_TAB_OPENED.ID,
+                        o.TB_ORDERED.ID,
+                        new MenuItemQueryResult(
+                            o.TB_MENU_ITEM.ID,
+                            o.TB_MENU_ITEM.NU_MENU_ITEM,
+                            o.TB_MENU_ITEM.DS_DESCRIPTION,
+                            o.TB_MENU_ITEM.ST_IS_DRINK,
+                            o.TB_MENU_ITEM.ST_ACTIVE
+                         ),
+                        o.NU_AMOUNT,
+                        o.DT_TO_SERVE,
+                        o.DT_IN_PREPARATION,
+                        o.DT_SERVED,
+                        o.DS_DESCRIPTION
                  )).ToList();
-                Console.WriteLine(result);
+
+                foreach (var item in result)
+                {
+                    Console.WriteLine(string.Format("{0} {1} {2} {3} {4} {5} {6} {7} {8}",
+                        item.MesaId,
+                        item.PedidoId,
+                        item.MenuItem.NumMenuItem,
+                        item.MenuItem.Descricao,
+                        item.Quantidade,
+                        item.AServir,
+                        item.EmPreparacao,
+                        item.Servido,
+                        item.Descricao
+                    ));
+                }
             }
             Console.ReadKey();
         }

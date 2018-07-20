@@ -1,7 +1,70 @@
-﻿
+﻿@model IEnumerable<Restaurante.UI.ViewModel.CozinhaTarefasViewModel>
+
 @{
-    ViewBag.Title = "Tarefas da Cozinha";
+    ViewBag.Title = "Index";
 }
 
-<h2>Cozinha</h2>
+<h2>Tarefas da cozinha</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PedidoId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MenuItem.NumMenuItem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MenuItem.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmPreparacao)
+        </th>
+        <th>
+        </th>
+        <th>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.OrderBy(o => o.PedidoId))
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PedidoId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MenuItem.NumMenuItem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MenuItem.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantidade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmPreparacao)
+        </td>
+        <td class="text-center">
+            @Html.CheckBoxFor(modelItem => item.MarcarComoPronto, new { @class = "checkbox " })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Servido)
+        </td>
+        <td></td>
+    </tr>
+    }
+
+</table>

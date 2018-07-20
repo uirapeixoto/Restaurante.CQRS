@@ -26,7 +26,6 @@ namespace Restaurante.UI.Controllers
             var result = _cozinhaTarefasQueryHandler.Handle(new CozinhaTarefasQuery(0))
                 .Select(o => new CozinhaTarefasViewModel {
                     MesaId = o.MesaId,
-                    NumMesa = o.NumMesa,
                     PedidoId = o.PedidoId,
                     MenuItem = new MenuItemViewModel
                     {

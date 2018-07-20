@@ -45,6 +45,7 @@ namespace Restaurante.UI.Controllers
 
         public ActionResult Abrir()
         {
+            ViewBag.Mensagem = TempData["Mensagem"] ?? string.Empty;
 
             var mesa = new MesaAbertaViewModel();
 
@@ -62,13 +63,21 @@ namespace Restaurante.UI.Controllers
         [HttpPost]
         public ActionResult Abrir(MesaAbertaViewModel mesa)
         {
-
-            var result = _abrirMesaComandHandler.Handle(new AbrirMesaCommand(mesa.NumMesa,mesa.Garcom.Id));
-            var mesaAberta = new MesaAbertaViewModel
+            try
             {
-                Id = result.Id
-            };
-            return RedirectToAction("Pedido","Mesa",new { id = mesaAberta.Id });
+                var result = _abrirMesaComandHandler.Handle(new AbrirMesaCommand(mesa.NumMesa, mesa.Garcom.Id));
+                var mesaAberta = new MesaAbertaViewModel
+                {
+                    Id = result.Id
+                };
+                return RedirectToAction("Pedido", "Mesa", new { id = mesaAberta.Id });
+            }
+            catch (System.Exception ex)
+            {
+                TempData["Mensagem"] = ex.Message;
+                return RedirectToAction("Abrir", "Mesa");
+            }
+            
         }
 
         public ActionResult Selecionar(int Id)

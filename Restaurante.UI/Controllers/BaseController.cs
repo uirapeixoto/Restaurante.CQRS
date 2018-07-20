@@ -12,6 +12,7 @@ namespace Restaurante.UI.Controllers
     public class BaseController : Controller
     {
         // GET: Base
+        [NonAction]
         protected MesaStatusViewModel AgregarPedidos(IList<PedidoViewModel> pedidos)
         {
             var pedidosAServir = new List<PedidoItemViewModel>();
