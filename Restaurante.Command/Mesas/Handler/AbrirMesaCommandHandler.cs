@@ -50,7 +50,7 @@ namespace Restaurante.Command.Mesas.Handler
                 }
                 else
                 {
-                    throw new Exception("Essa mesa ja foi aberta");
+                    throw new Exception("Essa mesa já está aberta");
                 }
             }
             catch (Exception ex)
