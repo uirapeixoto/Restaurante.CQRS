@@ -18,26 +18,29 @@ namespace Restaurante.Query.Handler
         }
         public IEnumerable<CozinhaTarefasQueryResult> Handle(CozinhaTarefasQuery query)
         {
-            var result = _context.TB_ORDERED_ITEM
-                .Where(x => x.DT_IN_PREPARATION.HasValue)
-                .Where(x => !x.TB_MENU_ITEM.ST_IS_DRINK)
-                .Select(o => new CozinhaTarefasQueryResult(
-                    o.TB_ORDERED.TB_TAB_OPENED.ID,
-                    o.TB_ORDERED.TB_TAB_OPENED.NU_TABLE.Value,
-                    o.TB_ORDERED.ID,
-                    new MenuItemQueryResult(
-                            o.TB_MENU_ITEM.ID,
-                            o.TB_MENU_ITEM.NU_MENU_ITEM,
-                            o.TB_MENU_ITEM.DS_DESCRIPTION,
-                            o.TB_MENU_ITEM.ST_IS_DRINK,
-                            o.TB_MENU_ITEM.ST_ACTIVE
+            var result = _context.TB_ORDERED
+                .AsNoTracking()
+                .AsParallel()
+                .Select(o => new PedidosStatusQueryResult(
+                    o.ID,
+                    o.TB_TAB_OPENED.NU_TABLE.Value,
+                    o.TB_ORDERED_ITEM
+                    .Where(x => x.DT_IN_PREPARATION.HasValue)
+                    .Where(x => !x.TB_MENU_ITEM.ST_IS_DRINK)
+                    .Select(i => new PedidoItemQueryResult(
+                        i.ID,
+                        new MenuItemQueryResult(
+                            i.ID_MENU_ITEM,
+                            i.TB_MENU_ITEM.NU_MENU_ITEM,
+                            i.TB_MENU_ITEM.DS_DESCRIPTION,
+                            i.TB_MENU_ITEM.ST_IS_DRINK,
+                            i.TB_MENU_ITEM.ST_ACTIVE
                             ),
-                    o.NU_AMOUNT,
-                    o.DT_TO_SERVE,
-                    o.DT_IN_PREPARATION,
-                    o.DT_SERVED,
-                    o.DS_DESCRIPTION
-                    ));
+                        i.NU_AMOUNT,
+                        i.DT_TO_SERVE,
+                        i.DT_IN_PREPARATION,
+                        i.DT_SERVED)
+                    ))).ToList();
 
             return result;
         }
