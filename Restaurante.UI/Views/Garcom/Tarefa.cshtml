@@ -1,7 +1,154 @@
-﻿
+﻿@model IEnumerable<Restaurante.UI.ViewModel.MesaAbertaViewModel>
+
 @{
     ViewBag.Title = "Tarefa";
 }
 
+<style rel="stylesheet">
+    ul.none {
+        list-style-type: none;
+    }
+
+    ul.disc {
+        list-style-type: disc;
+    }
+
+    ul.circle {
+        list-style-type: circle;
+    }
+
+    ul.square {
+        list-style-type: square;
+    }
+
+    .caption-small {
+        font: small-caption
+    }
+</style>
+
 <h2>Tarefa</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Mesas
+        </th>
+        <th>Pedidos</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <div class="row table">
+                    <div class="col-lg-6 text-center"><h3>@Html.DisplayFor(modelItem => item.NumMesa)</h3></div><br />
+                    <div class="col-sm-6 text-center caption-small">@Html.DisplayFor(modelItem => item.DataServico)</div>
+                </div>
+            </td>
+            <td>
+                <ul class="none">
+                    <li>
+                        <b>Bebidas</b>
+                        <ul class="none">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <b>Menu #</b>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <b>Descricao</b>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Quant</b>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <b>Data Pedido</b>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    @foreach (var pedido in item.Pedidos)
+                    {
+                        <li>
+                            <ul class="none">
+
+                                @foreach (var bebida in pedido.PedidoBebidaItens)
+                                {
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                @bebida.MenuItem.NumMenuItem
+                                            </div>
+                                            <div class="col-md-3">
+                                                @bebida.MenuItem.Descricao
+                                            </div>
+                                            <div class="col-md-2">
+                                                @bebida.Quantidade
+                                            </div>
+                                            <div class="col-md-2">
+                                                @bebida.AServir
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                        <li>
+                            <b>Refeições</b>
+                            <ul class="none">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <b>Menu #</b>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <b>Descricao</b>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <b>Quant</b>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <b>Data Pedido</b>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    @foreach (var pedido in item.Pedidos)
+                    {
+                        <li>
+                            <ul class="none">
+                                @foreach (var bebida in pedido.PedidoComidaItens)
+                                {
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                @bebida.MenuItem.NumMenuItem
+                                            </div>
+                                            <div class="col-md-3">
+                                                @bebida.MenuItem.Descricao
+                                            </div>
+                                            <div class="col-md-2">
+                                                @bebida.Quantidade
+                                            </div>
+                                            <div class="col-md-2">
+                                                @bebida.EmPreparacao
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                </ul>
+
+            </td>
+        </tr>
+    }
+
+</table>

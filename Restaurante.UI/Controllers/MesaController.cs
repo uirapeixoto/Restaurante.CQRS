@@ -12,7 +12,7 @@ using System.Web.Mvc;
 namespace Restaurante.UI.Controllers
 {
     [IncludeLayoutData]
-    public class MesaController : Controller
+    public class MesaController : BaseController
     {
         readonly IQueryHandler<IEnumerable<GarcomQueryResult>> _garconsListHandler;
         readonly ICommandHandler<AbrirMesaCommand, AbrirMesaCommandResult> _abrirMesaComandHandler;
@@ -45,6 +45,7 @@ namespace Restaurante.UI.Controllers
 
         public ActionResult Abrir()
         {
+            ViewBag.Mensagem = TempData["Mensagem"] ?? string.Empty;
 
             var mesa = new MesaAbertaViewModel();
 
@@ -62,13 +63,21 @@ namespace Restaurante.UI.Controllers
         [HttpPost]
         public ActionResult Abrir(MesaAbertaViewModel mesa)
         {
-
-            var result = _abrirMesaComandHandler.Handle(new AbrirMesaCommand(mesa.NumMesa,mesa.Garcom.Id));
-            var mesaAberta = new MesaAbertaViewModel
+            try
             {
-                Id = result.Id
-            };
-            return RedirectToAction("Pedido","Mesa",new { id = mesaAberta.Id });
+                var result = _abrirMesaComandHandler.Handle(new AbrirMesaCommand(mesa.NumMesa, mesa.Garcom.Id));
+                var mesaAberta = new MesaAbertaViewModel
+                {
+                    Id = result.Id
+                };
+                return RedirectToAction("Pedido", "Mesa", new { id = mesaAberta.Id });
+            }
+            catch (System.Exception ex)
+            {
+                TempData["Mensagem"] = ex.Message;
+                return RedirectToAction("Abrir", "Mesa");
+            }
+            
         }
 
         public ActionResult Selecionar(int Id)
@@ -211,50 +220,6 @@ namespace Restaurante.UI.Controllers
             };
             return View(mesaStatus);
         }
-
-        protected MesaStatusViewModel AgregarPedidos(IList<PedidoViewModel> pedidos)
-        {
-            var pedidosAServir = new  List<PedidoItemViewModel>();
-            var pedidosComidaEmPreparacao = new List<PedidoItemViewModel>();
-            var pedidosServidos = new List<PedidoItemViewModel>();
-            
-
-            foreach (var pedido in pedidos)
-            {
-                foreach (var item in pedido.PedidoBebidaItens.Where(x => !x.Servido.HasValue))
-                {
-                    pedidosAServir.Add(item);
-                }
-            }
-
-            foreach (var pedido in pedidos)
-            {
-                foreach (var item in pedido.PedidoComidaItens.Where(x => x.EmPreparacao.HasValue && !x.MenuItem.Bebida))
-                {
-                    pedidosComidaEmPreparacao.Add(item);
-                }
-            }
-
-            foreach (var pedido in pedidos)
-            {
-                foreach (var item in pedido.PedidoBebidaItens.Where(x => x.Servido.HasValue))
-                {
-                    pedidosServidos.Add(item);
-                }
-                foreach (var item in pedido.PedidoComidaItens.Where(x => x.Servido.HasValue))
-                {
-                    pedidosServidos.Add(item);
-                }
-            }
-
-            var pedidosItensConsolidados = new MesaStatusViewModel
-            {
-                PedidosAServir = pedidosAServir,
-                PedidosEmPreparacao = pedidosComidaEmPreparacao,
-                PedidosServidos = pedidosServidos
-            };
-
-            return pedidosItensConsolidados;
-        }
+        
     }
 }

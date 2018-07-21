@@ -44,6 +44,7 @@
     <Compile Include="ICommand.cs" />
     <Compile Include="ICommandHandler.cs" />
     <Compile Include="ICommandResult.cs" />
+    <Compile Include="IEventStore.cs" />
     <Compile Include="IQuery.cs" />
     <Compile Include="IQueryHandler.cs" />
     <Compile Include="IQueryResult.cs" />

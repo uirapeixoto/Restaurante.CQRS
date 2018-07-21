@@ -14,7 +14,7 @@ namespace Restaurante.Query.Result
         public DateTime? Servido { get; }
         public MenuItemQueryResult MenuItem { get; }
 
-        public PedidoItemQueryResult(int id, MenuItemQueryResult menuItem, int quantidade, DateTime? aServir, DateTime? emPreparacao, DateTime? servido, decimal ajustePreco = (decimal) 0.0, string descricao = "" )
+        public PedidoItemQueryResult(int id, MenuItemQueryResult menuItem, int quantidade, DateTime? aServir, DateTime? emPreparacao, DateTime? servido, string descricao = "" )
         {
             Id = id;
             MenuItem = menuItem;
@@ -22,9 +22,7 @@ namespace Restaurante.Query.Result
             AServir = aServir;
             EmPreparacao = emPreparacao;
             Servido = servido;
-            AjustePreco = ajustePreco;
             Descricao = descricao;
         }
-
     }
 }

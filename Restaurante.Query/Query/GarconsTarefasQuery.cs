@@ -2,10 +2,11 @@
 
 namespace Restaurante.Query.Query
 {
-    public class CozinhaTarefasQuery : IQuery
+    public class GarconsTarefasQuery : IQuery
     {
         public int Id { get; }
-        public CozinhaTarefasQuery(int id)
+
+        public GarconsTarefasQuery(int id)
         {
             Id = id;
         }

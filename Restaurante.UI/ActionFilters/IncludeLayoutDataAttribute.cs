@@ -39,11 +39,11 @@ namespace Restaurante.UI.ActionFilters
                         Nome = o.Nome
                     }
                 );
-                var list = new List<string>();
+                var listaGarcons = new Dictionary<int,string>();
 
                 foreach (var item in garcons)
                 {
-                    list.Add(item.Nome);
+                    listaGarcons.Add(item.Id, item.Nome);
                 }
 
                 var mesas = _mesasAbertas.Handle();
@@ -53,11 +53,9 @@ namespace Restaurante.UI.ActionFilters
                 {
                     listaMesas.Add(item.Id, item.NumMesa);
                 }
-
-                bag.Garcons = garcons;
-                bag.GarconsStr = list;
+                bag.Garcons = listaGarcons;
                 bag.ActiveTables = listaMesas;
-            bag.MesasAtivas = OpenTabQueries.ActiveTableNumbers;
+                bag.MesasAtivas = OpenTabQueries.ActiveTableNumbers;
             }
         }
 

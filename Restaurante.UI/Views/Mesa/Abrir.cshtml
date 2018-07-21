@@ -12,6 +12,18 @@
 
     <fieldset>
         <div class="form-horizontal">
+
+            @{
+                if (!string.IsNullOrEmpty(ViewBag.Mensagem as string))
+                {
+                    <div class="form-group">
+                        <div class="alert alert-danger glyphicon glyphicon-thumbs-down" role="alert">
+                            <b>@ViewBag.Mensagem</b>
+                        </div>
+                    </div>
+                }
+            }
+
             <div class="form-group">
                 @Html.LabelFor(model => model.NumMesa)
                 @Html.TextBoxFor(model => model.NumMesa, new { @class = "form-control number required" })

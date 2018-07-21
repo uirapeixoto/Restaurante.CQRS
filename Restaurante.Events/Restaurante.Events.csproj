@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Aggregate.cs" />
+    <Compile Include="DisparadorEventos.cs" />
     <Compile Include="Mesas\DrinksServed.cs" />
     <Compile Include="Mesas\DrinksOrdered.cs" />
     <Compile Include="Mesas\FoodOrdered.cs" />
