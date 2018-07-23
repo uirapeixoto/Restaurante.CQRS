@@ -18,88 +18,86 @@
             <div class="panel-body">
                 @using (Html.BeginForm(null, null, FormMethod.Post))
                 {
-
-                <div class="tab-content">
-                    @Html.HiddenFor(m => Model.MesaId)
-                    @Html.HiddenFor(m => Model.NumMesa)
-                    <div class="tab-pane fade in active" id="tab1default">
-                        <table class="table">
-                            <tr>
-                                <th>
-                                    Nº Menu
-                                </th>
-                                <th>
-                                    Descrição
-                                </th>
-                                <th>
-                                    Quant
-                                </th>
-                                <th></th>
-                            </tr>
-                            @{
-                                int t1 = Model.PedidoBebidaItens.Count();
-                                int t2 = Model.PedidoComidaItens.Count();
-                            }
-                            @for (var i = 0; i < t1; i++)
-                            {
+                    <div class="tab-content">
+                        @Html.HiddenFor(m => Model.MesaId)
+                        @Html.HiddenFor(m => Model.NumMesa)
+                        <div class="tab-pane fade in active" id="tab1default">
+                            <table class="table table-responsive table-hover">
                                 <tr>
-                                    <td>
-                                        @Html.DisplayFor(m => m.PedidoBebidaItens[i].MenuItem.NumMenuItem)
-                                        @Html.HiddenFor(m => m.PedidoBebidaItens[i].MenuItem.NumMenuItem)
-                                        @Html.HiddenFor(m => m.PedidoBebidaItens[i].MenuItem.Id)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(m => m.PedidoBebidaItens[i].MenuItem.Descricao)
-                                        @Html.HiddenFor(m => m.PedidoBebidaItens[i].MenuItem.Descricao)
-                                    </td>
-                                    <td>
-                                        @Html.EditorFor(m => m.PedidoBebidaItens[i].Quantidade, new { @class = "number" })
-                                    </td>
+                                    <th width="15%">
+                                        Nº Menu
+                                    </th>
+                                    <th width="65%">
+                                        Descrição
+                                    </th>
+                                    <th width="20%">
+                                        Quant
+                                    </th>
+                                    <th></th>
                                 </tr>
-                            }
+                                @{
+                                    int t1 = Model.PedidoBebidaItens.Count();
+                                    int t2 = Model.PedidoComidaItens.Count();
+                                }
+                                @for (var i = 0; i < t1; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(m => m.PedidoBebidaItens[i].MenuItem.NumMenuItem)
+                                            @Html.HiddenFor(m => m.PedidoBebidaItens[i].MenuItem.NumMenuItem)
+                                            @Html.HiddenFor(m => m.PedidoBebidaItens[i].MenuItem.Id)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => m.PedidoBebidaItens[i].MenuItem.Descricao)
+                                            @Html.HiddenFor(m => m.PedidoBebidaItens[i].MenuItem.Descricao)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(m => m.PedidoBebidaItens[i].Quantidade, new { @class = "number" })
+                                        </td>
+                                    </tr>
+                                }
 
-                        </table>
-                    </div>
-                    <div class="tab-pane fade" id="tab2default">
-                        <table class="table">
-                            <tr>
-                                <th>
-                                    Nº Menu
-                                </th>
-                                <th>
-                                    Descrição
-                                </th>
-                                <th>
-                                    Quant
-                                </th>
-                                <th></th>
-                            </tr>
-
-                            @for (var i = 0; i < t2; i++)
-                            {
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="tab2default">
+                            <table class="table">
                                 <tr>
-                                    <td>
-                                        @Html.DisplayFor(m => m.PedidoComidaItens[i].MenuItem.NumMenuItem)
-                                        @Html.HiddenFor(m => m.PedidoComidaItens[i].MenuItem.NumMenuItem)
-                                        @Html.HiddenFor(m => m.PedidoComidaItens[i].MenuItem.Id)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(m => m.PedidoComidaItens[i].MenuItem.Descricao)
-                                        @Html.HiddenFor(m => m.PedidoComidaItens[i].MenuItem.Descricao)
-                                    </td>
-                                    <td>
-                                        @Html.EditorFor(m => m.PedidoComidaItens[i].Quantidade, new { @class = "number" })
-                                    </td>
+                                    <th>
+                                        Nº Menu
+                                    </th>
+                                    <th>
+                                        Descrição
+                                    </th>
+                                    <th>
+                                        Quant
+                                    </th>
+                                    <th></th>
                                 </tr>
-                            }
 
-                        </table>
+                                @for (var i = 0; i < t2; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(m => m.PedidoComidaItens[i].MenuItem.NumMenuItem)
+                                            @Html.HiddenFor(m => m.PedidoComidaItens[i].MenuItem.NumMenuItem)
+                                            @Html.HiddenFor(m => m.PedidoComidaItens[i].MenuItem.Id)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => m.PedidoComidaItens[i].MenuItem.Descricao)
+                                            @Html.HiddenFor(m => m.PedidoComidaItens[i].MenuItem.Descricao)
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(m => m.PedidoComidaItens[i].Quantidade, new { @class = "number" })
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="tab3default">Default 3</div>
                     </div>
-                    <div class="tab-pane fade" id="tab3default">Default 3</div>
-                </div>
                     <button type="submit" class="btn">Fazer Pedido</button>
                 }
-
             </div>
         </div>
     </div>

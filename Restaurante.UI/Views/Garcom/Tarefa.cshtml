@@ -27,6 +27,59 @@
 </style>
 
 <h2>Tarefa</h2>
+<div class="row">
+    <div class="row" id="titulo">
+        <div class="col-lg-2"><b>Mesa</b></div>
+        <div class="col-lg-10 text-center"><b>Pedidos</b></div>
+    </div>
+    <div class="row" id="subtitulo">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-10 text-center">
+            <div class="col-md-1">
+                <b>Menu#</b>
+            </div>
+            <div class="col-md-4">
+                <b>Descricao</b>
+            </div>
+            <div class="col-md-1">
+                <b>Quant</b>
+            </div>
+            <div class="col-md-4">
+                <b>Data Pedido</b>
+            </div>
+        </div>
+
+    </div>
+    <div class="row" id="dados">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-2 left">@Html.ActionLink(item.NumMesa.ToString(), "Status", "Mesa", new { id = item.Id.ToString() }, new { @class = "btn btn-lg btn-default active" })</div>
+            <div class="col-lg-10 right">
+                @foreach (var pedido in item.Pedidos)
+                {
+                    foreach (var bebida in pedido.PedidoBebidaItens)
+                    {
+                        <div class="row">
+                            <div class="col-md-2">
+                                @bebida.MenuItem.NumMenuItem
+                            </div>
+                            <div class="col-md-4">
+                                @bebida.MenuItem.Descricao
+                            </div>
+                            <div class="col-md-2">
+                                @bebida.Quantidade
+                            </div>
+                            <div class="col-md-4">
+                                @bebida.EmPreparacao
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        }
+
+    </div>
+</div>
 
 <table class="table">
     <tr>
@@ -35,11 +88,10 @@
         </th>
         <th>Pedidos</th>
     </tr>
-
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            <td rolspan="@item.Pedidos">
                 <span class="button-checkbox">
                     <button type="button" class="btn btn-default active" data-color="primary">
                         <h3>
@@ -134,9 +186,7 @@
                         }
                     }
                 </ul>
-
             </td>
         </tr>
     }
-
 </table>
