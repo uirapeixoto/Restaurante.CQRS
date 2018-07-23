@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace Restaurante.Contract
+﻿namespace Restaurante.Contract
 {
     public interface ICommandHandler<TCommand>
     {

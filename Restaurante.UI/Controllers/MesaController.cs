@@ -107,7 +107,7 @@ namespace Restaurante.UI.Controllers
                         Bebida = m.Bebida,
                         Ativo = m.Ativo
                     }
-                }).ToList(),
+                }).OrderBy(x => x.MenuItem.NumMenuItem).ToList(),
                 PedidoComidaItens = menu.Where(x => !x.Bebida).Select(m => new PedidoItemViewModel
                 {
                     MenuItem = new MenuItemViewModel
@@ -118,7 +118,7 @@ namespace Restaurante.UI.Controllers
                         Bebida = m.Bebida,
                         Ativo = m.Ativo
                     }
-                }).ToList()
+                }).OrderBy(x => x.MenuItem.NumMenuItem).ToList()
             };
 
             return View(pedido);

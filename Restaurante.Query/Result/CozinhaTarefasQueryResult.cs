@@ -7,6 +7,7 @@ namespace Restaurante.Query.Result
     {
         public int MesaId { get; }
         public int PedidoId { get; }
+        public int PedidoItemId { get; }
         public string Descricao { get; }
         public DateTime? AServir { get; }
         public DateTime? EmPreparacao { get; }
@@ -17,6 +18,7 @@ namespace Restaurante.Query.Result
         public CozinhaTarefasQueryResult(
         int mesaId,
         int pedidoId,
+        int pedidoItemId,
         MenuItemQueryResult menuItem,
          int quantidade,
          DateTime? aServir,
@@ -26,6 +28,7 @@ namespace Restaurante.Query.Result
         {
             MesaId = mesaId;
             PedidoId = pedidoId;
+            PedidoItemId = pedidoItemId;
             MenuItem = menuItem;
             Quantidade = quantidade;
             AServir = aServir;

@@ -1,70 +1,138 @@
-﻿@model IEnumerable<Restaurante.UI.ViewModel.CozinhaTarefasViewModel>
+﻿@model IList<Restaurante.UI.ViewModel.CozinhaTarefasViewModel>
 
 @{
     ViewBag.Title = "Index";
+    Model.OrderBy(o => o.PedidoItemId).ToList();
+
 }
 
 <h2>Tarefas da cozinha</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PedidoId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MenuItem.NumMenuItem)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MenuItem.Descricao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Quantidade)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EmPreparacao)
-        </th>
-        <th>
-        </th>
-        <th>
-        </th>
-        <th></th>
-    </tr>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel with-nav-tabs panel-default">
+            <div class="panel-heading">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab1default" data-toggle="tab">A Preparar</a></li>
+                    <li><a href="#tab2default" data-toggle="tab">Preparados</a></li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="tab1default">
+                        @using (Html.BeginForm("MarcarComoPronto", null, FormMethod.Post))
+                        {
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        Id
+                                    </th>
+                                    <th>
+                                        Menu#
+                                    </th>
+                                    <th>
+                                        Descrição
+                                    </th>
+                                    <th>
+                                        Quantidade
+                                    </th>
+                                    <th>
+                                        Observação
+                                    </th>
+                                    <th>
+                                        Pedido
+                                    </th>
+                                    <th>Pronto</th>
+                                </tr>
+                                @for (var i = 0; i < Model.Where(x => !x.AServir.HasValue).OrderBy(o => o.PedidoItemId).Count(); i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => Model[i].PedidoItemId)
+                                            @Html.HiddenFor(modelItem => Model[i].PedidoItemId)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => Model[i].MenuItem.NumMenuItem)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => Model[i].MenuItem.Descricao)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => Model[i].Quantidade)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => Model[i].Descricao)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => Model[i].EmPreparacao)
+                                        </td>
+                                        <td class="text-center">
+                                            @Html.CheckBoxFor(modelItem => Model[i].MarcarComoPronto, new { @class = "checkbox form-control" })
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td colspan="5">&nbsp;</td>
+                                    <td colspan="2" class="text-center">
+                                        <button type="submit" class="btn btn-primary ">Marcar Como Servido</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        }
+                    </div>
 
-    @foreach (var item in Model.OrderBy(o => o.PedidoId))
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PedidoId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MenuItem.NumMenuItem)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MenuItem.Descricao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantidade)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descricao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmPreparacao)
-        </td>
-        <td class="text-center">
-            @Html.CheckBoxFor(modelItem => item.MarcarComoPronto, new { @class = "checkbox " })
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Servido)
-        </td>
-        <td></td>
-    </tr>
-    }
+                    <div class="tab-pane fade" id="tab2default">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    Id
+                                </th>
+                                <th>
+                                    Menu#
+                                </th>
+                                <th>
+                                    Descrição
+                                </th>
+                                <th>
+                                    Quantidade
+                                </th>
+                                <th>
+                                    Observação
+                                </th>
+                                <th>Servido</th>
+                            </tr>
+                            @for (var i = 0; i < Model.Where(x => x.AServir.HasValue).OrderBy(o => o.PedidoItemId).Count(); i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => Model[i].PedidoItemId)
+                                        @Html.HiddenFor(modelItem => Model[i].PedidoItemId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => Model[i].MenuItem.NumMenuItem)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => Model[i].MenuItem.Descricao)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => Model[i].Quantidade)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => Model[i].Descricao)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => Model[i].AServir)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.CheckBoxFor(modelItem => Model[i].MarcarComoPronto, new { @class = "checkbox form-control" })
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-</table>

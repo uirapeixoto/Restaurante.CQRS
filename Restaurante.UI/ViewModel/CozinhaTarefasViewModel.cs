@@ -6,6 +6,8 @@ namespace Restaurante.UI.ViewModel
 {
     public class CozinhaTarefasViewModel
     {
+        [Display(Name = "Id")]
+        public int PedidoItemId { get; set; }
         [Display(Name = "Mesa")]
         public int MesaId { get; set; }
         public int NumMesa { get; set; }
@@ -24,18 +26,25 @@ namespace Restaurante.UI.ViewModel
         [Display(Name = "Data Servido")]
         public DateTime? Servido { get; set; }
         public MenuItemViewModel MenuItem { get; set; }
+        
+        public IList<PedidoItemViewModel> PedidosProntos { get; set; }
+
+        public IList<PedidoItemViewModel> PedidosSolicitados(IList<PedidoItemViewModel> pedidos)
+        {
+            return pedidos;
+        }
 
         public bool MarcarComoPronto
         {
             get
             {
-                return (Servido.HasValue);
+                return (AServir.HasValue);
             }
             set
             {
                 if (value)
                 {
-                    Servido = DateTime.Now;
+                    AServir = DateTime.Now;
                 }
             }
         }

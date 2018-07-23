@@ -15,7 +15,7 @@ namespace Restaurante.Command.Mesas.Handler
             _context = context;
         }
 
-        protected bool BusinessValidation(int id)
+        protected bool Validacao(int id)
         {
             var result = _context.TB_ORDERED_ITEM.Where(x => x.ID == id);
             if(result.Any())
@@ -29,7 +29,7 @@ namespace Restaurante.Command.Mesas.Handler
         {
             try
             {
-                if (BusinessValidation(c.Id))
+                if (Validacao(c.Id))
                 {
                     var registro = _context.TB_ORDERED_ITEM.Where(x => x.ID == c.Id).FirstOrDefault();
                     registro.DT_SERVED = c.DataServido;

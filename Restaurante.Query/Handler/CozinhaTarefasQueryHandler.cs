@@ -25,12 +25,13 @@ namespace Restaurante.Query.Handler
                 .Include(i => i.TB_ORDERED)
                 .Include(i => i.TB_ORDERED.TB_TAB_OPENED)
                 .Where(x => !x.TB_MENU_ITEM.ST_IS_DRINK)
-                .Where(x => !x.DT_SERVED.HasValue)
+                .Where(x => !x.DT_TO_SERVE.HasValue)
                 .Where(x => x.DT_IN_PREPARATION.HasValue)
                 .AsParallel()
                 .Select(o => new CozinhaTarefasQueryResult(
                        o.TB_ORDERED.TB_TAB_OPENED.ID,
                        o.TB_ORDERED.ID,
+                       o.ID,
                        new MenuItemQueryResult(
                            o.TB_MENU_ITEM.ID,
                            o.TB_MENU_ITEM.NU_MENU_ITEM,
@@ -45,7 +46,7 @@ namespace Restaurante.Query.Handler
                        o.DS_DESCRIPTION
                 )).ToList();
 
-            return result;
+            return result.OrderBy(x => x.PedidoId);
         }
     }
 }

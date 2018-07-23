@@ -11,10 +11,17 @@
         <li class="nav-header">Mesas Abertas</li>
         @{
             var linkMesas = ViewBag.ActiveTables as Dictionary<int, int>;
+            var i = 1;
         }
-        @foreach (KeyValuePair<int, int> item in linkMesas.OrderBy(k => k.Key))
-        {
-            @Html.ActionLink(item.Value.ToString(), "Status", "Mesa", new { id = item.Key.ToString() }, new { @class= "btn btn-lg btn-default active" })
-        }
+
     </ul>
+    @foreach (KeyValuePair<int, int> item in linkMesas.OrderBy(k => k.Key))
+    {
+        @Html.ActionLink(item.Value.ToString(), "Status", "Mesa", new { id = item.Key.ToString() }, new { @class = "btn btn-lg btn-default active" })
+        if (i % 3 == 0)
+        {
+            <br />
+        }
+        i++;
+    }
 </div><!--/.well -->

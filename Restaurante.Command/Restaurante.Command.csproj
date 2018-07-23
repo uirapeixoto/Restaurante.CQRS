@@ -48,10 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Cozinha\Command\MarcarComoProntoCommand.cs" />
+    <Compile Include="Cozinha\Handler\MarcarComoProntoCommandHandler.cs" />
     <Compile Include="Mesas\CommandResult\AbrirMesaCommandResult.cs" />
-    <Compile Include="Mesas\Command\MarcarComoProntoCommand.cs" />
     <Compile Include="Mesas\Command\MarcarComoServidoCommand.cs" />
-    <Compile Include="Mesas\Handler\MarcarComoProntoCommandHandler.cs" />
     <Compile Include="Mesas\Handler\MarcarComoServidoCommandHandler.cs" />
     <Compile Include="Mesas\Handler\PedidoCommandHandler.cs" />
     <Compile Include="Mesas\Command\AbrirMesaCommand.cs" />
@@ -84,6 +84,8 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Cozinha\Result\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
