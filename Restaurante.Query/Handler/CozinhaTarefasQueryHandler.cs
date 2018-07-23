@@ -25,7 +25,7 @@ namespace Restaurante.Query.Handler
                 .Include(i => i.TB_ORDERED)
                 .Include(i => i.TB_ORDERED.TB_TAB_OPENED)
                 .Where(x => !x.TB_MENU_ITEM.ST_IS_DRINK)
-                .Where(x => !x.DT_TO_SERVE.HasValue)
+                //.Where(x => !x.DT_TO_SERVE.HasValue)
                 .Where(x => x.DT_IN_PREPARATION.HasValue)
                 .AsParallel()
                 .Select(o => new CozinhaTarefasQueryResult(

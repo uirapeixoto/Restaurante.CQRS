@@ -42,7 +42,7 @@
                         <td class="text-center">@Html.DisplayFor(m => m.PedidosAServir[i].Quantidade)</td>
                         <td class="text-center">@Html.DisplayFor(m => m.PedidosAServir[i].AServir)</td>
                         <td class="text-center">
-                            @Html.CheckBoxFor(m => m.PedidosAServir[i].MarcarComoServido, new { @class = "checkbox " })
+                            @Html.CheckBoxFor(m => m.PedidosAServir[i].MarcarComoServido, new { @class = "checkbox form-control" })
                             @Html.HiddenFor(m => m.PedidosAServir[i].Id)
                         </td>
                     </tr>
@@ -50,7 +50,7 @@
             </tbody>
         </table>
 
-        <button type="submit" class="btn btn-default ">Marcar Como Servido</button>
+        <button type="submit" class="btn btn-primary ">Marcar Como Servido</button>
     }
 }
 

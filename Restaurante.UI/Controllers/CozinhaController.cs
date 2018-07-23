@@ -51,7 +51,13 @@ namespace Restaurante.UI.Controllers
                     Servido = o.Servido
                 }).ToList();
 
-            return View(result);
+            var _refeicoesProntas = result
+                .Where(x => x.AServir.HasValue)
+                .OrderBy(o => o.PedidoItemId).ToList();
+
+            ViewBag.RefeicoesProntas = _refeicoesProntas.Count() > 0 ? _refeicoesProntas : new List<CozinhaTarefasViewModel>();
+
+            return View(result.Where(x => !x.AServir.HasValue).ToList());
         }
 
         [HttpPost]
