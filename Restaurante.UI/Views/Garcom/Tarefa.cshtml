@@ -28,165 +28,123 @@
 
 <h2>Tarefa</h2>
 <div class="row">
-    <div class="row" id="titulo">
-        <div class="col-lg-2"><b>Mesa</b></div>
-        <div class="col-lg-10 text-center"><b>Pedidos</b></div>
-    </div>
-    <div class="row" id="subtitulo">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-10 text-center">
-            <div class="col-md-1">
-                <b>Menu#</b>
+    <div class="col-md-12">
+        <div class="panel with-nav-tabs panel-default">
+            <div class="panel-heading">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab1default" data-toggle="tab">Bebidas</a></li>
+                    <li><a href="#tab2default" data-toggle="tab">Refeições</a></li>
+                </ul>
             </div>
-            <div class="col-md-4">
-                <b>Descricao</b>
-            </div>
-            <div class="col-md-1">
-                <b>Quant</b>
-            </div>
-            <div class="col-md-4">
-                <b>Data Pedido</b>
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="tab1default">
+                        <div class="row">
+                            <div class="row" id="subtitulo">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-10 text-center">
+                                    <div class="col-md-2">
+                                        <b>Menu#</b>
+                                    </div>
+                                    <div class="col-md-4 text-center">
+                                        <b>Descricao</b>
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                        <b>Quant</b>
+                                    </div>
+                                    <div class="col-md-4 text-center">
+                                        <b>Data Pedido</b>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row" id="dados">
+                                @foreach (var item in Model)
+                                {
+                                    <div class="col-lg-2 left">@Html.ActionLink(string.Format("Mesa {0}", item.NumMesa.ToString()), "Status", "Mesa", new { id = item.Id.ToString() }, new { @class="btn btn-default"})</div>
+                                    <div class="col-lg-10 right">
+                                        @foreach (var pedido in item.Pedidos)
+                                        {
+                                            foreach (var bebida in pedido.PedidoBebidaItens)
+                                            {
+                                                <div class="row">
+                                                    <div class="col-md-2 text-center">
+                                                        @bebida.MenuItem.NumMenuItem
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        @bebida.MenuItem.Descricao
+                                                    </div>
+                                                    <div class="col-md-2 text-center">
+                                                        @bebida.Quantidade
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        @bebida.AServir
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                        <hr />
+                                    </div>
+                                    
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab2default">
+
+                        <div class="row table">
+                            <div class="row" id="subtitulo">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-10 text-center">
+                                    <div class="col-md-2">
+                                        <b>Menu#</b>
+                                    </div>
+                                    <div class="col-md-4 text-center">
+                                        <b>Descricao</b>
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                        <b>Quant</b>
+                                    </div>
+                                    <div class="col-md-4 text-center">
+                                        <b>Data Pedido</b>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row" id="dados">
+                                @foreach (var item in Model)
+                                {
+                                    <div class="col-lg-2 left">@Html.ActionLink(string.Format("Mesa {0}", item.NumMesa.ToString()), "Status", "Mesa", new { id = item.Id.ToString() }, new { @class ="btn btn-default"})</div>
+                                    <div class="col-lg-10 right">
+                                        @foreach (var pedido in item.Pedidos)
+                                        {
+                                            foreach (var bebida in pedido.PedidoComidaItens)
+                                            {
+                                                <div class="row">
+                                                    <div class="col-md-2 text-center">
+                                                        @bebida.MenuItem.NumMenuItem
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        @bebida.MenuItem.Descricao
+                                                    </div>
+                                                    <div class="col-md-2 text-center">
+                                                        @bebida.Quantidade
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        @bebida.EmPreparacao
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                        <hr />
+                                    </div>
+                                    
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-    </div>
-    <div class="row" id="dados">
-        @foreach (var item in Model)
-        {
-            <div class="col-lg-2 left">@Html.ActionLink(item.NumMesa.ToString(), "Status", "Mesa", new { id = item.Id.ToString() }, new { @class = "btn btn-lg btn-default active" })</div>
-            <div class="col-lg-10 right">
-                @foreach (var pedido in item.Pedidos)
-                {
-                    foreach (var bebida in pedido.PedidoBebidaItens)
-                    {
-                        <div class="row">
-                            <div class="col-md-2">
-                                @bebida.MenuItem.NumMenuItem
-                            </div>
-                            <div class="col-md-4">
-                                @bebida.MenuItem.Descricao
-                            </div>
-                            <div class="col-md-2">
-                                @bebida.Quantidade
-                            </div>
-                            <div class="col-md-4">
-                                @bebida.EmPreparacao
-                            </div>
-                        </div>
-                    }
-                }
-            </div>
-        }
-
     </div>
 </div>
-
-<table class="table">
-    <tr>
-        <th>
-            Mesas
-        </th>
-        <th>Pedidos</th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td rolspan="@item.Pedidos">
-                <span class="button-checkbox">
-                    <button type="button" class="btn btn-default active" data-color="primary">
-                        <h3>
-                            @Html.ActionLink(item.NumMesa.ToString(), "Status", "Mesa", new { id = item.Id.ToString() }, new { @class = "btn btn-lg btn-default active" })
-                        </h3><br />
-                        @Html.DisplayFor(modelItem => item.DataServico.Value, new { @class = "text-center caption-small" })
-                    </button>
-                </span>
-            </td>
-            <td>
-                <ul class="none">
-                    <li>
-                        <b>Bebidas</b>
-                    </li>
-                    <li>
-                        <div class="row">
-                            <div class="col-md-1">
-                                <b>Menu #</b>
-                            </div>
-                            <div class="col-md-3">
-                                <b>Descricao</b>
-                            </div>
-                            <div class="col-md-2">
-                                <b>Quant</b>
-                            </div>
-                            <div class="col-md-2">
-                                <b>Data Pedido</b>
-                            </div>
-                        </div>
-                    </li>
-                    @foreach (var pedido in item.Pedidos)
-                    {
-                        foreach (var bebida in pedido.PedidoBebidaItens)
-                        {
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-1">
-                                        @bebida.MenuItem.NumMenuItem
-                                    </div>
-                                    <div class="col-md-3">
-                                        @bebida.MenuItem.Descricao
-                                    </div>
-                                    <div class="col-md-2">
-                                        @bebida.Quantidade
-                                    </div>
-                                    <div class="col-md-2">
-                                        @bebida.AServir
-                                    </div>
-                                </div>
-                            </li>
-                        }
-                    }
-                    <li>
-                        <b>Refeições</b>
-                    </li>
-                    <li>
-                        <div class="row">
-                            <div class="col-md-1">
-                                <b>Menu #</b>
-                            </div>
-                            <div class="col-md-3">
-                                <b>Descricao</b>
-                            </div>
-                            <div class="col-md-2">
-                                <b>Quant</b>
-                            </div>
-                            <div class="col-md-2">
-                                <b>Data Pedido</b>
-                            </div>
-                        </div>
-                    </li>
-                    @foreach (var pedido in item.Pedidos)
-                    {
-                        foreach (var bebida in pedido.PedidoComidaItens)
-                        {
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-1">
-                                        @bebida.MenuItem.NumMenuItem
-                                    </div>
-                                    <div class="col-md-3">
-                                        @bebida.MenuItem.Descricao
-                                    </div>
-                                    <div class="col-md-2">
-                                        @bebida.Quantidade
-                                    </div>
-                                    <div class="col-md-2">
-                                        @bebida.EmPreparacao
-                                    </div>
-                                </div>
-                            </li>
-                        }
-                    }
-                </ul>
-            </td>
-        </tr>
-    }
-</table>
