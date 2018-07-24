@@ -191,7 +191,10 @@ namespace Restaurante.UI.Controllers
                     EmPreparacao = i.EmPreparacao,
                     Servido = i.Servido
                 }).ToList(),
-                PedidoComidaItens = x.ItensPedidos.Where(b => !b.MenuItem.Bebida).Select(i => new PedidoItemViewModel
+                PedidoComidaItens = x.ItensPedidos
+                .Where(b => !b.MenuItem.Bebida)
+                .Where(b => !b.Servido.HasValue)
+                .Select(i => new PedidoItemViewModel
                 {
                     Id = i.Id,
                     MenuItem = new MenuItemViewModel
