@@ -6,104 +6,139 @@
 
 <h2>Pedidos para a mesa @Model.NumMesa</h2>
 
-<div>
-    <i class="icon-remove"></i>
-    @Html.ActionLink(" Fechar Mesa", "Fechar", new { id = Model.MesaId }, new { @class = "glyphicon glyphicon-plus" })
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel with-nav-tabs panel-default">
+            <div class="panel-heading">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab1default" data-toggle="tab">Servir</a></li>
+                    <li><a href="#tab2default" data-toggle="tab">Cozinha</a></li>
+                    <li><a href="#tab3default" data-toggle="tab">Servidos</a></li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="tab1default">
+
+                        @if (Model.PedidosAServir.Any())
+                        {
+                            using (Html.BeginForm("MarcarComoServido", "Mesa", FormMethod.Post))
+                            {
+                                @Html.HiddenFor(m => m.MesaId)
+                                @Html.HiddenFor(m => m.NumMesa)
+
+                                <h4>Bebidas</h4>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Menu #</th>
+                                            <th>Descrição</th>
+                                            <th class="text-center">Quantidade</th>
+                                            <th class="text-center">Quando</th>
+                                            <th class="text-center"><i class=" glyphicon glyphicon-check"></i> Marcar como servido</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (int i = 0; i < Model.PedidosAServir.Count(); i++)
+                                        {
+                                            <tr>
+                                                <td>@Html.DisplayFor(m => m.PedidosAServir[i].MenuItem.NumMenuItem)</td>
+                                                <td>@Html.DisplayFor(m => m.PedidosAServir[i].MenuItem.Descricao)</td>
+                                                <td class="text-center">@Html.DisplayFor(m => m.PedidosAServir[i].Quantidade)</td>
+                                                <td class="text-center">@Html.DisplayFor(m => m.PedidosAServir[i].AServir)</td>
+                                                <td class="text-center">
+                                                    @Html.CheckBoxFor(m => m.PedidosAServir[i].MarcarComoServido, new { @class = "checkbox form-control" })
+                                                    @Html.HiddenFor(m => m.PedidosAServir[i].Id)
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                                <button type="submit" class="btn btn-primary ">Marcar Como Servido</button>
+                            }
+                        }
+
+                    </div>
+                    <div class="tab-pane fade" id="tab2default">
+
+                        @if (Model.PedidosEmPreparacao.Any())
+                        {
+                            <h4>Em Preparação</h4>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Menu #</th>
+                                        <th>Descriçao</th>
+                                        <th class="text-center">Quando</th>
+                                        <th class="text-center">Quantidade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < Model.PedidosEmPreparacao.Count(); i++)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(m => m.PedidosEmPreparacao[i].MenuItem.NumMenuItem)</td>
+                                            <td>@Html.DisplayFor(m => m.PedidosEmPreparacao[i].MenuItem.Descricao)</td>
+                                            <td class="text-center">@Html.DisplayFor(m => m.PedidosEmPreparacao[i].EmPreparacao)</td>
+                                            <td class="text-center">
+                                                @Html.DisplayFor(m => m.PedidosEmPreparacao[i].Quantidade)
+                                                @Html.HiddenFor(m => m.PedidosEmPreparacao[i].Id)
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+
+                    </div>
+                    <div class="tab-pane fade" id="tab3default">
+
+                        @if (Model.PedidosServidos.Any())
+                        {
+                            <h4>Itens Já Servidos</h4>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Menu #</th>
+                                        <th>Description</th>
+                                        <th class="text-center">Quando</th>
+                                        <th class="text-center">Quantidade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.PedidosServidos)
+                                    {
+                                        <tr>
+                                            <td>@item.MenuItem.NumMenuItem</td>
+                                            <td>@item.MenuItem.Descricao</td>
+                                            <td class="text-center">@item.Servido</td>
+                                            <td class="text-center">@item.Quantidade</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <i class="icon-plus"></i>
-    @Html.ActionLink(" Pedidos", "Pedido", new { id = Model.MesaId }, new { @class = "glyphicon glyphicon-plus" })
+
+<div class="container">
+    <div class="right" style="float:right">
+        <i class="icon-remove"></i>
+        @Html.ActionLink("Fechar Mesa", "Fechar", new { id = Model.MesaId }, new { @class = "btn btn-default" })
+    </div>
+    <div class="left" style="float:left">
+        <i class="icon-plus"></i>
+        @Html.ActionLink("Adicionar Pedidos", "Pedido", new { id = Model.MesaId }, new { @class = "btn btn-default" })
+    </div>
 </div>
 
-@if (Model.PedidosAServir.Any())
-{
-    using (Html.BeginForm("MarcarComoServido", "Mesa", FormMethod.Post))
-    {
-        <h3>Itens para servir</h3>
-        @Html.HiddenFor(m => m.MesaId)
-        @Html.HiddenFor(m => m.NumMesa)
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Menu #</th>
-                    <th>Descrição</th>
-                    <th class="text-center">Quantidade</th>
-                    <th class="text-center">Quando</th>
-                    <th class="text-center"><i class=" glyphicon glyphicon-check"></i> Marcar como servido</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (int i = 0; i < Model.PedidosAServir.Count(); i++)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(m => m.PedidosAServir[i].MenuItem.NumMenuItem)</td>
-                        <td>@Html.DisplayFor(m => m.PedidosAServir[i].MenuItem.Descricao)</td>
-                        <td class="text-center">@Html.DisplayFor(m => m.PedidosAServir[i].Quantidade)</td>
-                        <td class="text-center">@Html.DisplayFor(m => m.PedidosAServir[i].AServir)</td>
-                        <td class="text-center">
-                            @Html.CheckBoxFor(m => m.PedidosAServir[i].MarcarComoServido, new { @class = "checkbox form-control" })
-                            @Html.HiddenFor(m => m.PedidosAServir[i].Id)
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
 
-        <button type="submit" class="btn btn-primary ">Marcar Como Servido</button>
-    }
-}
 
-@if (Model.PedidosEmPreparacao.Any())
-{
-    <h3>Itens em preparação</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Menu #</th>
-                <th>Descriçao</th>
-                <th class="text-center">Quando</th>
-                <th class="text-center">Quantidade</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (int i = 0; i < Model.PedidosEmPreparacao.Count(); i++)
-            {
-            <tr>
-                <td>@Html.DisplayFor(m => m.PedidosEmPreparacao[i].MenuItem.NumMenuItem)</td>
-                <td>@Html.DisplayFor(m => m.PedidosEmPreparacao[i].MenuItem.Descricao)</td>
-                <td class="text-center">@Html.DisplayFor(m => m.PedidosEmPreparacao[i].EmPreparacao)</td>
-                <td class="text-center">
-                    @Html.DisplayFor(m => m.PedidosEmPreparacao[i].Quantidade)
-                    @Html.HiddenFor(m => m.PedidosEmPreparacao[i].Id)
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
-}
-@if (Model.PedidosServidos.Any())
-{
-    <h3>Itens Já Servidos</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Menu #</th>
-                <th>Description</th>
-                <th class="text-center">Quando</th>
-                <th class="text-center">Quantidade</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.PedidosServidos)
-            {
-                <tr>
-                    <td>@item.MenuItem.NumMenuItem</td>
-                    <td>@item.MenuItem.Descricao</td>
-                    <td class="text-center">@item.Servido</td>
-                    <td class="text-center">@item.Quantidade</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+
