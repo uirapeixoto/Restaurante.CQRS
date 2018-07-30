@@ -9,6 +9,7 @@ namespace Restaurante.UI.ViewModel
         public int NumMenuItem { get; set; }
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }
+        public decimal Valor { get; set; }
         public bool Bebida { get; set; }
         public bool Ativo { get; set; }
     }

@@ -24,6 +24,7 @@ namespace Restaurante.Query.Handler
                     x.ID,
                     x.NU_MENU_ITEM,
                     x.DS_DESCRIPTION,
+                    x.NU_PRICE,
                     x.ST_IS_DRINK,
                     x.ST_ACTIVE
                 )).ToList();

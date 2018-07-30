@@ -31,7 +31,8 @@ namespace Restaurante.Query.Handler
                             new MenuItemQueryResult(
                                 i.TB_MENU_ITEM.ID,
                                 i.TB_MENU_ITEM.NU_MENU_ITEM, 
-                                i.TB_MENU_ITEM.DS_DESCRIPTION, 
+                                i.TB_MENU_ITEM.DS_DESCRIPTION,
+                                i.TB_MENU_ITEM.NU_PRICE,
                                 i.TB_MENU_ITEM.ST_IS_DRINK,
                                 i.TB_MENU_ITEM.ST_ACTIVE),
                             i.NU_AMOUNT,

@@ -16,14 +16,17 @@
                     <li><a href="#tab3default" data-toggle="tab">Servidos</a></li>
                 </ul>
             </div>
+
             <div class="panel-body">
                 <div class="tab-content">
-                    <div class="tab-pane fade in active" id="tab1default">
 
-                        @if (Model.PedidosAServir.Any())
+                    <div class="tab-pane fade in active" id="tab1default">
+                        @using (Html.BeginForm("MarcarComoServido", "Mesa", FormMethod.Post))
                         {
-                            using (Html.BeginForm("MarcarComoServido", "Mesa", FormMethod.Post))
+                            if (Model.PedidosAServir.Any())
                             {
+
+
                                 @Html.HiddenFor(m => m.MesaId)
                                 @Html.HiddenFor(m => m.NumMesa)
 
@@ -61,41 +64,53 @@
 
                     </div>
                     <div class="tab-pane fade" id="tab2default">
-
-                        @if (Model.PedidosEmPreparacao.Any())
+                        @using (Html.BeginForm("MarcarComoServido", "Mesa", FormMethod.Post))
                         {
-                            <h4>Em Preparação</h4>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Menu #</th>
-                                        <th>Descriçao</th>
-                                        <th class="text-center">Quando</th>
-                                        <th class="text-center">Quantidade</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @for (int i = 0; i < Model.PedidosEmPreparacao.Count(); i++)
-                                    {
+                            if (Model.PedidosEmPreparacao.Any())
+                            {
+                                @Html.HiddenFor(m => m.MesaId)
+                                @Html.HiddenFor(m => m.NumMesa)
+                                <h4>Em Preparação</h4>
+                                <table class="table">
+                                    <thead>
                                         <tr>
-                                            <td>@Html.DisplayFor(m => m.PedidosEmPreparacao[i].MenuItem.NumMenuItem)</td>
-                                            <td>@Html.DisplayFor(m => m.PedidosEmPreparacao[i].MenuItem.Descricao)</td>
-                                            <td class="text-center">@Html.DisplayFor(m => m.PedidosEmPreparacao[i].EmPreparacao)</td>
-                                            <td class="text-center">
-                                                @Html.DisplayFor(m => m.PedidosEmPreparacao[i].Quantidade)
-                                                @Html.HiddenFor(m => m.PedidosEmPreparacao[i].Id)
-                                            </td>
+                                            <th>Menu #</th>
+                                            <th>Descriçao</th>
+                                            <th class="text-center">Quando</th>
+                                            <th class="text-center">Quantidade</th>
+                                            <th class="text-center"><i class=" glyphicon glyphicon-check"></i> Marcar como servido</th>
                                         </tr>
-                                    }
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @for (int i = 0; i < Model.PedidosEmPreparacao.Count(); i++)
+                                        {
+                                            <tr>
+                                                <td>@Html.DisplayFor(m => m.PedidosEmPreparacao[i].MenuItem.NumMenuItem)</td>
+                                                <td>@Html.DisplayFor(m => m.PedidosEmPreparacao[i].MenuItem.Descricao)</td>
+                                                <td class="text-center">@Html.DisplayFor(m => m.PedidosEmPreparacao[i].EmPreparacao)</td>
+                                                <td class="text-center">
+                                                    @Html.DisplayFor(m => m.PedidosEmPreparacao[i].Quantidade)
+                                                    @Html.HiddenFor(m => m.PedidosEmPreparacao[i].Id)
+                                                </td>
+                                                <td class="text-center">
+                                                    @Html.CheckBoxFor(m => m.PedidosEmPreparacao[i].MarcarComoServido, new { @class = "checkbox form-control" })
+                                                    @Html.HiddenFor(m => m.PedidosEmPreparacao[i].Id)
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <button type="submit" class="btn btn-primary ">Marcar Como Servido</button>
+                            }
                         }
 
                     </div>
+
                     <div class="tab-pane fade" id="tab3default">
 
                         @if (Model.PedidosServidos.Any())
                         {
+                            decimal subTotal = 0M;
                             <h4>Itens Já Servidos</h4>
                             <table class="table">
                                 <thead>
@@ -104,6 +119,7 @@
                                         <th>Description</th>
                                         <th class="text-center">Quando</th>
                                         <th class="text-center">Quantidade</th>
+                                        <th class="text-center">Preço</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -114,18 +130,40 @@
                                             <td>@item.MenuItem.Descricao</td>
                                             <td class="text-center">@item.Servido</td>
                                             <td class="text-center">@item.Quantidade</td>
+                                            <td class="text-center">
+                                                @{
+
+                                                    var resultado = decimal.Multiply(item.MenuItem.Valor, item.Quantidade);
+                                                    subTotal += resultado;
+                                                }
+                                                @resultado
+                                            </td>
                                         </tr>
                                     }
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-center"><b>SubTotal</b></td>
+                                        <td class="text-center">
+                                            @{
+                                                var quantidade = Model.PedidosServidos.Sum(x => x.Quantidade);
+                                            }
+                                            @quantidade
+                                        </td>
+                                        <td class="text-center">
+                                            <b>@subTotal</b>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         }
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <div class="container">
     <div class="right" style="float:right">

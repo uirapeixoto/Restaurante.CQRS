@@ -30,7 +30,7 @@ namespace Restaurante.UI.Controllers
 
             foreach (var pedido in pedidos)
             {
-                foreach (var item in pedido.PedidoComidaItens.Where(x => x.EmPreparacao.HasValue && !x.MenuItem.Bebida))
+                foreach (var item in pedido.PedidoComidaItens.Where(x => x.EmPreparacao.HasValue && !x.Servido.HasValue && !x.MenuItem.Bebida))
                 {
                     pedidosComidaEmPreparacao.Add(item);
                 }

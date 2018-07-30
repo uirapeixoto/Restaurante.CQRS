@@ -36,6 +36,7 @@ namespace Restaurante.Query.Handler
                            o.TB_MENU_ITEM.ID,
                            o.TB_MENU_ITEM.NU_MENU_ITEM,
                            o.TB_MENU_ITEM.DS_DESCRIPTION,
+                           o.TB_MENU_ITEM.NU_PRICE,
                            o.TB_MENU_ITEM.ST_IS_DRINK,
                            o.TB_MENU_ITEM.ST_ACTIVE
                         ),

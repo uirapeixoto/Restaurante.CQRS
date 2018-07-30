@@ -165,6 +165,11 @@ namespace Restaurante.UI.Controllers
                 _marcarComoServidoCommandHandler.Handle(new MarcarComoServidoCommand(item.Id, item.Servido));
             }
 
+            foreach (var item in mesaStatus.PedidosEmPreparacao.Where(x => x.MarcarComoServido))
+            {
+                _marcarComoServidoCommandHandler.Handle(new MarcarComoServidoCommand(item.Id, item.Servido));
+            }
+
             return RedirectToAction("Status", new { id = mesaStatus.MesaId});
         }
 
@@ -183,6 +188,7 @@ namespace Restaurante.UI.Controllers
                         Id = i.MenuItem.Id,
                         NumMenuItem = i.MenuItem.NumMenuItem,
                         Descricao = i.MenuItem.Descricao,
+                        Valor = i.MenuItem.Valor,
                         Bebida = i.MenuItem.Bebida
                     },
                     Descricao = i.Descricao,
@@ -193,7 +199,7 @@ namespace Restaurante.UI.Controllers
                 }).ToList(),
                 PedidoComidaItens = x.ItensPedidos
                 .Where(b => !b.MenuItem.Bebida)
-                .Where(b => !b.Servido.HasValue)
+                //.Where(b => !b.Servido.HasValue)
                 .Select(i => new PedidoItemViewModel
                 {
                     Id = i.Id,
@@ -202,6 +208,7 @@ namespace Restaurante.UI.Controllers
                         Id = i.MenuItem.Id,
                         NumMenuItem = i.MenuItem.NumMenuItem,
                         Descricao = i.MenuItem.Descricao,
+                        Valor = i.MenuItem.Valor,
                         Bebida = i.MenuItem.Bebida
                     },
                     Descricao = i.Descricao,
