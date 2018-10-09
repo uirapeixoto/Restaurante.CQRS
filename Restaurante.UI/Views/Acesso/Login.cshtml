@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Restaurante.UI.ViewModel.LoginViewModel
+
+@{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
@@ -10,8 +12,12 @@
                 <div class="panel-heading">
                     <strong> Controle de Acesso </strong>
                 </div>
+                <div>
+                    @Html.ValidationSummary(true)
+                </div>
                 <div class="panel-body">
-                    <form role="form" action="#" method="POST">
+                    @using (Html.BeginForm(null, null, FormMethod.Post))
+                    {
                         <fieldset>
                             <div class="row text-center" style="margin: 15px;">
                                 <div class="center-block">
@@ -26,7 +32,7 @@
                                             <span class="input-group-addon">
                                                 <i class="glyphicon glyphicon-user"></i>
                                             </span>
-                                            <input class="form-control" placeholder="Username" name="loginname" type="text" autofocus>
+                                            @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control" } })
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -34,7 +40,7 @@
                                             <span class="input-group-addon">
                                                 <i class="glyphicon glyphicon-lock"></i>
                                             </span>
-                                            <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                            @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control" } })
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -43,12 +49,14 @@
                                 </div>
                             </div>
                         </fieldset>
-                    </form>
+                    }
                 </div>
                 <div class="panel-footer ">
-                    Não tenho uma conta ainda! <a href="#" onClick=""> Entrar </a>
+                    Não tenho uma conta ainda! <a href="https://medium.com/wiliambuzatto/asp-net-indentity-limpo-e-despido-mvc-e9e8f73c0d25" onClick=""> Entrar </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+

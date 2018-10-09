@@ -197,6 +197,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\CozinhaTarefasViewModel.cs" />
     <Compile Include="ViewModel\GarcomViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MenuItemViewModel.cs" />
     <Compile Include="ViewModel\MesaAbertaViewModel.cs" />
     <Compile Include="ViewModel\MesaStatusViewModel.cs" />
