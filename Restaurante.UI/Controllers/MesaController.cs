@@ -6,7 +6,9 @@ using Restaurante.Query.Result;
 using Restaurante.UI.ActionFilters;
 using Restaurante.UI.ViewModel;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Restaurante.UI.Controllers
@@ -175,6 +177,8 @@ namespace Restaurante.UI.Controllers
 
         public ActionResult Status(int id)
         {
+            var watch = new Stopwatch();
+            watch.Start();
             var mesa = _mesaAbertaQueryHandler.Handle(new MesaAbertaQuery(id,0));
             var pedidos = mesa.Pedidos.Select(x => new PedidoViewModel
             {
@@ -228,8 +232,9 @@ namespace Restaurante.UI.Controllers
                PedidosEmPreparacao = pedidosItensAgregados.PedidosEmPreparacao,
                PedidosServidos = pedidosItensAgregados.PedidosServidos
             };
+            watch.Stop();
+            ViewBag.WatchMilliseconds = string.Format("{0} ms", watch.ElapsedMilliseconds);
             return View(mesaStatus);
         }
-        
     }
 }

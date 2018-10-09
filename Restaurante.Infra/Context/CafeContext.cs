@@ -1,6 +1,9 @@
 namespace Restaurante.Infra.Context
 {
+    using System;
     using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
 
     public partial class CafeContext : DbContext, ICafeContext
     {
@@ -9,6 +12,7 @@ namespace Restaurante.Infra.Context
         {
         }
 
+        public virtual DbSet<TB_ACCESS> TB_ACCESS { get; set; }
         public virtual DbSet<TB_MENU_ITEM> TB_MENU_ITEM { get; set; }
         public virtual DbSet<TB_ORDERED> TB_ORDERED { get; set; }
         public virtual DbSet<TB_ORDERED_ITEM> TB_ORDERED_ITEM { get; set; }
@@ -19,6 +23,26 @@ namespace Restaurante.Infra.Context
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<TB_ACCESS>()
+                .Property(e => e.DS_EMAIL)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<TB_ACCESS>()
+                .Property(e => e.DS_PASSWORD)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<TB_ACCESS>()
+                .Property(e => e.DS_PERFIL)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<TB_ACCESS>()
+                .Property(e => e.DS_NAME)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<TB_ACCESS>()
+                .Property(e => e.DS_LAST_NAME)
+                .IsUnicode(false);
+
             modelBuilder.Entity<TB_MENU_ITEM>()
                 .Property(e => e.DS_DESCRIPTION)
                 .IsUnicode(false);

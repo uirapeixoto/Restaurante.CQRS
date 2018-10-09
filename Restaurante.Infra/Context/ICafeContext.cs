@@ -14,7 +14,7 @@ namespace Restaurante.Infra.Context
          DbSet<TB_TAB_OPENED> TB_TAB_OPENED { get; set; }
          DbSet<TB_TODO> TB_TODO { get; set; }
          DbSet<TB_WAITSTAFF> TB_WAITSTAFF { get; set; }
-
+         DbSet<TB_ACCESS> TB_ACCESS { get; set; }
 
         int SaveChanges();
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;

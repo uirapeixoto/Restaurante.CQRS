@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
+
 namespace Restaurante.UI.Controllers
 {
     [IncludeLayoutData]
@@ -56,7 +57,6 @@ namespace Restaurante.UI.Controllers
                 .OrderBy(o => o.PedidoItemId).ToList();
 
             ViewBag.RefeicoesProntas = _refeicoesProntas.Count() > 0 ? _refeicoesProntas : new List<CozinhaTarefasViewModel>();
-
             return View(result.Where(x => !x.AServir.HasValue).ToList());
         }
 

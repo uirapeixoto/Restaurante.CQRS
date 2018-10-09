@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Context\CafeContext.cs" />
     <Compile Include="Context\ICafeContext.cs" />
+    <Compile Include="Context\TB_ACCESS.cs" />
     <Compile Include="Context\TB_MENU_ITEM.cs" />
     <Compile Include="Context\TB_ORDERED.cs" />
     <Compile Include="Context\TB_ORDERED_ITEM.cs" />
@@ -65,6 +66,10 @@
     <Compile Include="Migrations\201807162047146_addFieldAmountOrderedItem.cs" />
     <Compile Include="Migrations\201807162047146_addFieldAmountOrderedItem.Designer.cs">
       <DependentUpon>201807162047146_addFieldAmountOrderedItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809051433190_ultimasAlteracoes.cs" />
+    <Compile Include="Migrations\201809051433190_ultimasAlteracoes.Designer.cs">
+      <DependentUpon>201809051433190_ultimasAlteracoes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807162047146_addFieldAmountOrderedItem.resx">
       <DependentUpon>201807162047146_addFieldAmountOrderedItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809051433190_ultimasAlteracoes.resx">
+      <DependentUpon>201809051433190_ultimasAlteracoes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
